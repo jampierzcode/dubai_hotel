@@ -4,7 +4,7 @@
     </div>
     <div class="user-login">
         <!-- <FaBell /> campanas-->
-        <img src="../img/jampier.jpg" alt="img_avatar_user" />
+        <img src="../../img/jampier.jpg" alt="img_avatar_user" />
     </div>
 </nav>
 <div class="overlay-sidebar"></div>
@@ -18,14 +18,14 @@
     </div>
     <div class="main">
         <div class="perfil-user">
-            <img src="../img/jampier.jpg" alt="img_avatar_user" />
+            <img src="../../img/jampier.jpg" alt="img_avatar_user" />
             <p><?php echo $_SESSION["nombres"] ?></p>
         </div>
         <ul class="nav-links">
             <li class="links-menu-dashboard">
                 <div class="link-block">
                     <div class="left-link">
-                        <a class="toggle-drop" href="GestionHotel.php">
+                        <a class="toggle-drop" href="../GestionHotel">
                             <ion-icon name="pie-chart"></ion-icon>
                             <p>Dashboard</p>
                         </a>
@@ -35,7 +35,17 @@
             <li class="links-menu-dashboard">
                 <div class="link-block">
                     <div class="left-link">
-                        <a class="toggle-drop" href="Clients.php">
+                        <a class="toggle-drop" href="../Recepcion">
+                            <ion-icon name="notifications"></ion-icon>
+                            <p>Recepcion</p>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="links-menu-dashboard">
+                <div class="link-block">
+                    <div class="left-link">
+                        <a class="toggle-drop" href="../Clients">
                             <ion-icon name="people-sharp"></ion-icon>
                             <p>Clientes</p>
                         </a>
@@ -45,7 +55,7 @@
             <li class="links-menu-dashboard">
                 <div class="link-block">
                     <div class="left-link">
-                        <a class="toggle-drop" href="#">
+                        <a class="toggle-drop" href="../Habitaciones">
                             <ion-icon name="bed-outline"></ion-icon>
                             <p>Habitaciones</p>
                         </a>

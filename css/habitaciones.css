@@ -1,42 +1,63 @@
-.title-section {
-  font-size: 20px;
-  font-weight: 700;
+.create-habs {
+  width: 100%;
   margin-bottom: 30px;
 }
-/* Formulario del cliente */
-
-.create-clients {
-  width: 100%;
-  padding: 40px 0px;
-  margin-bottom: 30px;
-}
-.create-clients .form-add {
-  width: 100%;
-}
-.create-clients .form-add .content-form {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.create-clients .form-add .group-date {
-  width: 100%;
-  display: grid;
-  gap: 20px;
-}
-.create-clients .form-add .group-date > span {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-}
-.create-clients .form-add .group-date > input {
-  padding: 7px 20px;
-  border-radius: 4px;
-  border: 0px;
-  font-size: 14px;
-}
-.create-clients.hidden {
+.create-habs.hidden {
   display: none;
+}
+.content-form {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 20px;
+}
+.content-form .group-date {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+.content-form .group-date > span {
+  display: block;
+}
+.content-form .group-date > input {
+  padding: 9px 15px;
+  background: #fff;
+  border: 0px;
+  border-radius: 4px;
+}
+.content-form .group-date > select {
+  padding: 9px 15px;
+  background: #fff;
+  border: 0px;
+  border-radius: 4px;
+}
+.title-action {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.title-table {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.tables {
+  width: 100%;
+  display: grid;
+  gap: 30px;
+  grid-template-areas:
+    "n1 n1"
+    "n2 n3";
+}
+
+.table-container:nth-child(1) {
+  grid-area: n1;
+}
+.table-container:nth-child(2) {
+  grid-area: n2;
+}
+.table-container:nth-child(3) {
+  grid-area: n3;
 }
 .table-container {
   width: 100%;
@@ -79,8 +100,6 @@ table {
 }
 tr th,
 tr td {
-  text-align: start;
-  padding: 10px 15px;
   border-bottom: 1px solid #ececec;
   white-space: nowrap;
 }
@@ -90,13 +109,21 @@ td > ion-icon {
   padding: 10px 10px;
   cursor: pointer;
 }
-#edit-client {
+.edit-btn {
   background: #ececec;
 }
-#remove-client {
+.remove-btn {
   background: #d24444;
   color: #fff;
 }
 table tr:nth-child(1) {
   background: #fff !important;
+}
+/* table tbody tr:nth-child(2n + 1) {
+  background: #ececec;
+} */
+table th,
+table td {
+  padding: 10px 15px;
+  text-align: start;
 }

@@ -193,6 +193,11 @@
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.5s;
+}
+.link-block > .left-link > a:hover {
+  background: #fff;
+  color: #000;
 }
 .link-block > .left-link > a > p {
   margin: 0px !important;

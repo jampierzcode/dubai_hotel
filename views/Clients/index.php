@@ -9,58 +9,59 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/navdashboard.css">
-    <link rel="stylesheet" href="../css/container-dashboard.css">
-    <link rel="stylesheet" href="../css/clientes.css">
-    <link rel="icon" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/navdashboard.css">
+    <link rel="stylesheet" href="../../css/container-dashboard.css">
+    <link rel="stylesheet" href="../../css/clientes.css">
+    <link rel="icon" href="../../img/logo.jpg">
     <title>Hotel Dubai / Gestion</title>
 </head>
 
 <body>
     <?php
-    include_once "../components/Sidebar.php"
+    include_once "../../components/Sidebar.php"
     ?>
     <div class="container-dashboard">
         <span class="route">
             > Home > CLientes
         </span>
-        <button id="ancla-add" class="btn-add">
-            Agregar Cliente
-        </button>
+        <div class="links-container">
+            <a href="#" id="ancla-add" class="btn-add">
+                + Nuevo Cliente
+            </a>
+        </div>
         <div class="create-clients hidden">
             <div class="form-add" id="form-clients">
                 <div class="content-form">
                     <div class="group-date">
 
                         <span>Nombres y Apellidos</span>
-                        <input type="text" placeholder="Ingresa el nombre del cliente">
+                        <input id="client-names" type="text" placeholder="Ingresa el nombre del cliente">
                     </div>
                     <div class="group-date">
                         <span>DNI</span>
-                        <input type="number" placeholder="Ingresa el dni del cliente">
+                        <input id="client-dni" type="number" placeholder="Ingresa el dni del cliente">
                     </div>
                     <div class="group-date">
                         <span>Correo</span>
-                        <input type="email" placeholder="Ingresa el @correo del cliente">
+                        <input id="client-email" type="email" placeholder="Ingresa el @correo del cliente">
                     </div>
                     <div class="group-date">
                         <span>Telefono</span>
-                        <input type="number" placeholder="Ingresa el telefono del cliente">
+                        <input id="client-phone" type="number" placeholder="Ingresa el telefono del cliente">
                     </div>
                     <div class="group-date">
                         <span>Pais</span>
-                        <input type="text" placeholder="Ingresa el pais del cliente">
+                        <input id="client-pais" type="text" placeholder="Ingresa el pais del cliente">
                     </div>
                 </div>
                 <div class="actions-button">
-                    <button class="btn-add-create">Agregar</button>
+                    <button id="client-btn-add" class="btn-add-create">Agregar</button>
                     <button class="btn-cancel-create">Cancelar</button>
                 </div>
             </div>
         </div>
-        <h1 class="title-section">Mis Clientes</h1>
         <div class="table-container">
 
             <div class="section-search">
@@ -106,8 +107,8 @@ session_start();
     </div>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script src="../js/jquery.min.js"></script>
-<script src="../components/sidebar.js"></script>
-<script src="../js/gestionclient.js"></script>
+<script src="../../js/jquery.min.js"></script>
+<script src="../../components/sidebar.js"></script>
+<script src="../../js/gestionclient.js"></script>
 
 </html>
