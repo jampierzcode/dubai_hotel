@@ -75,7 +75,7 @@
             <li class="links-menu-dashboard">
                 <div class="link-block">
                     <div class="left-link">
-                        <a class="toggle-drop" href="../controlador/LogoutController.php">
+                        <a class="toggle-drop" href="../../controlador/LogoutController.php">
                             <ion-icon name="chevron-back-circle-sharp"></ion-icon>
                             <p>Cerrar sesión</p>
                         </a>

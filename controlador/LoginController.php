@@ -15,7 +15,7 @@ if (!empty($usuario->datos)) {
         $_SESSION["id_usuario"] = $dato->id_usuario;
         $_SESSION["nombres"] = $dato->nombre . " " . $dato->apellido;
     }
-    header("Location: ../views/GestionHotel.php");
+    header("Location: ../views/GestionHotel/");
 } else {
     $_SESSION["error"] = "EL usuario o contraseña es incorrecto";
     header("Location: ../Login.php");
