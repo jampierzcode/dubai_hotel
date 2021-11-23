@@ -28,7 +28,128 @@ session_start();
     <?php
     include_once "../../components/Sidebar.php"
     ?>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../GestionHotel">
+                    <ion-icon name="pie-chart"></ion-icon>
+                    <p>Dashboard</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop active-link" href="../Recepcion">
+                    <ion-icon name="notifications"></ion-icon>
+                    <p>Recepcion</p>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Clients">
+                    <ion-icon name="people-sharp"></ion-icon>
+                    <p>Clientes</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Habitaciones">
+                    <ion-icon name="bed-outline"></ion-icon>
+                    <p>Habitaciones</p>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Ventas">
+                    <i class="fas fa-dollar-sign"></i>
+                    <p>Ventas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Salidas">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <p>Salidas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Servicios">
+                    <ion-icon name="restaurant-outline"></ion-icon>
+                    <p>Servicio habitacion</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Productos">
+                    <ion-icon name="storefront-outline"></ion-icon>
+                    <p>Productos</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="#">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <p>Reservas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../../controlador/LogoutController.php">
+                    <ion-icon name="chevron-back-circle-sharp"></ion-icon>
+                    <p>Cerrar sesión</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    </ul>
+    </div>
+    </aside>
     <div class="container-dashboard">
+
+        <?php
+        if (isset($_SESSION["msg-reserva"])) {
+            if ($_SESSION["msg-reserva"] == "add-reserva") {
+
+        ?>
+                <div class="task-msg">
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                    <p>Se ha registrado correctamente la habitacion</p>
+                </div>
+
+        <?php
+                $_SESSION["msg-reserva"] = "nada";
+            }
+        }
+        ?>
         <span class="route">
             > Home > Recepcion
         </span>
@@ -37,6 +158,44 @@ session_start();
         ?>
             <?php
             if ($_GET["view"] = "reservar") { ?>
+                <div class="modal-create-client md-hidden">
+                    <div class="form-create-cliente">
+
+                        <div class="close-modal">
+                            <ion-icon name="close-circle-outline"></ion-icon>
+                        </div>
+                        <h1>Crear cliente</h1>
+                        <div class="card-input">
+                            <span>Tipo de documento</span>
+                            <div class="input-group">
+                                <select name="type-register" id="tipo-documento-modal">
+                                    <option value="0">Seleccione el tipo de documento</option>
+                                    <option value="1">DNI</option>
+                                    <option value="2">RUC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-input">
+                            <span>Documento</span>
+                            <div class="input-group">
+                                <i class="fas fa-address-card"></i>
+                                <input id="documento-modal" type="number" placeholder="Ingrese el numero">
+                            </div>
+                        </div>
+                        <div class="card-input">
+                            <span>Nombres</span>
+                            <div class="input-group">
+
+                                <ion-icon name="person-circle-outline"></ion-icon>
+                                <input id="nombres-modal" type="text" placeholder="Ingrese los nombres o razon social">
+                            </div>
+                        </div>
+                        <div class="card-input buttons-modal">
+                            <button id="cancel-form-client" class="btn-cancel">Cancelar</button>
+                            <button id="add-client-form" class="btn-create">Crear</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="registrar_hospedaje">
                     <h1>Detalles de la Habitacion</h1>
                     <div class="detail_habitacion">
@@ -60,21 +219,35 @@ session_start();
                 </div>
                 <div class="form-register-host">
                     <div class="card-input">
-                        <span>Cliente</span>
-                        <input id="get-id" type="hidden" value="<?php echo $_GET["id"] ?>">
-                        <div class="input-group">
-                            <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Ingresa los nombres del cliente">
+                        <div class="header-clients">
+                            <span>Cliente</span>
+                            <button id="new_cliente">+ Nuevo cliente</button>
                         </div>
                     </div>
                     <div class="card-input">
-                        <span>Tipo de registro</span>
+                        <span>Tipo de cliente</span>
                         <div class="input-group">
-                            <select name="type-register" id="reserva-tipo">
-                                <option value="0">Seleccione el tipo de reserva</option>
-                                <option value="1">Hospedaje</option>
-                                <option value="2">Reserva</option>
+                            <select name="type-register" id="reserva-tipo-documento">
+                                <option value="0">Seleccione el tipo de documento</option>
+                                <option value="1">DNI</option>
+                                <option value="2">RUC</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="card-input">
+                        <input id="get-id" type="hidden" value="<?php echo $_GET["id"] ?>">
+                        <div class="input-group">
+                            <i class="fas fa-address-card"></i>
+                            <input id="reserva-documento" disabled type="number" placeholder="Ingrese el numero">
+                            <button id="btn-search-dni-ruc" class="btn-search">
+                                <ion-icon name="search-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-input">
+                        <div class="input-group">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <input key-documento="" id="reserva-cliente" disabled type="text" placeholder="Nombres del cliente">
                         </div>
                     </div>
                     <div class="card-input">
@@ -135,7 +308,11 @@ session_start();
             ?>
         <?php } else {
         ?>
-
+            <div class="search-piso-habs">
+                <h1>Buscar por piso:</h1>
+                <select name="search-piso" id="search-piso">
+                </select>
+            </div>
             <div class="list-habitaciones">
             </div>
         <?php } ?>
@@ -147,5 +324,6 @@ session_start();
 <script src="../../components/sidebar.js"></script>
 <script src="../../js/gestion_recepcion.js"></script>
 <script src="../../js/gestion-registro.js"></script>
+<script src="../../js/task-msg.js"></script>
 
 </html>

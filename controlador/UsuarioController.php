@@ -5,6 +5,159 @@ session_start();
 $id_usuario = $_SESSION['id_usuario'];
 
 
+
+// SECTION DE CLIENTES
+if ($_POST["funcion"] == "buscar_cliente") {
+    $documento = $_POST["documento"];
+    $json = array();
+    $usuario->buscar_cliente($documento);
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_cliente' => $dato->id_cliente,
+                'nombres' => $dato->nombres,
+                'documento' => $dato->documento
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+
+
+// FIN DE SECTION DE CLIENTES
+
+// SECTION DE RESERVAS
+if ($_POST["funcion"] == "buscar_reserva") {
+    $id_habitacion = $_POST["id_habitacion"];
+    $json = array();
+    $usuario->buscar_reserva($id_habitacion);
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_reservas' => $dato->id_reservas,
+                'cliente' => $dato->cliente,
+                'documento' => $dato->documento,
+                'id_habitaciones' => $dato->id_habitaciones,
+                'precio' => $dato->precio,
+                'n_cuarto' => $dato->n_cuarto,
+                'nombre_categoria' => $dato->nombre_categoria,
+                'fecha_entrada' => $dato->fecha_entrada,
+                'fecha_salida' => $dato->fecha_salida,
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+// SECTION DE DETAIL RESERVAS
+if ($_POST["funcion"] == "buscar_detail_reserva") {
+    $id_reserva = $_POST["id_reserva"];
+    $json = array();
+    $usuario->buscar_detail_reserva($id_reserva);
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_reservas' => $dato->id_reservas,
+                'total' => $dato->total,
+                'descuento' => $dato->descuento,
+                'adelanto' => $dato->adelanto,
+                'total_descuento' => $dato->total_descuento
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+// SECTION DE DETAIL CONSUMO
+if ($_POST["funcion"] == "buscar_detail_consumo") {
+    $id_reserva = $_POST["id_reserva"];
+    $json = array();
+    $usuario->buscar_detail_consumo($id_reserva);
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'cantidad' => $dato->cantidad,
+                'estado_pago' => $dato->estado_pago,
+                'subtotal' => $dato->subtotal,
+                'nombre' => $dato->nombre,
+                'precio' => $dato->precio
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+
+if ($_POST["funcion"] == "subir_foto_producto") {
+    if (($_FILES['imagen_producto']['type'] == 'image/jpeg') || ($_FILES['imagen_producto']['type'] == 'image/png') || ($_FILES['imagen_producto']['type'] == 'image/jpg')) {
+        $nombre = uniqid() . '-' . $_FILES['imagen_producto']['name'];
+        $ruta = '../img/productos/' . $nombre;
+        move_uploaded_file($_FILES['imagen_producto']['tmp_name'], $ruta);
+        echo $ruta;
+    } else {
+        echo "no_format_imagen";
+    }
+}
+
+// FIN DE SECTION DE RESERVAS
+
+// SECTION PRODUCTOS
+if ($_POST["funcion"] == "crear_productos") {
+    $nombre = $_POST["nombre"];
+    $precio = $_POST["precio"];
+    $inventario = $_POST["inventario"];
+    $usuario->crear_productos($nombre, $precio, $inventario);
+    echo $usuario->mensaje;
+}
+if ($_POST["funcion"] == "buscar_productos") {
+    $json = array();
+    $usuario->buscar_productos();
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_productos' => $dato->id_productos,
+                'nombre' => $dato->nombre,
+                'precio' => $dato->precio,
+                'inventario' => $dato->inventario
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+// FIN DE SECTION PRODUCTOS
+
+// SECTION DE VENTAS DE PRODUCTOS
+if ($_POST["funcion"] == "registrar_ventas_productos") {
+    $json = array();
+    $productos = $_POST["carrito"];
+    $id_reserva = $_POST["id_reserva"];
+    $option = $_POST["option"];
+    $usuario->registrar_ventas_productos($productos, $id_reserva, $option);
+    echo $usuario->mensaje;
+}
+// FIN DE SECTION DE VENTAS DE PRODUCTOS
+
+
+
+// SECTION DE HABITACIONES
+
 if ($_POST["funcion"] == "crear_habitacion") {
     $n_habitacion = $_POST["n_habitacion"];
     $habs_piso = $_POST["habs_piso"];
@@ -78,3 +231,59 @@ if ($_POST["funcion"] == "buscar_piso_hab") {
         echo $jsonstring;
     }
 }
+
+if ($_POST["funcion"] == "buscar_habs_ocupaded") {
+    $json = array();
+    $usuario->buscar_ocupaded_habs();
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_habitaciones' => $dato->id_habitaciones,
+                'n_cuarto' => $dato->n_cuarto,
+                'precio' => $dato->precio,
+                'nombre_categoria' => $dato->nombre_categoria,
+                'numero_piso' => $dato->numero_piso,
+                'estado' => $dato->nombre_estado
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+
+// FIN DE HABITACIONES
+
+// SECTION RESERVAS
+if ($_POST["funcion"] == "crear_reserva") {
+    $cliente = $_POST["cliente"];
+    $documento = $_POST["documento"];
+    $ingreso = $_POST["ingreso"];
+    $salida = $_POST["salida"];
+    $descuento = $_POST["descuento"];
+    $adelanto = $_POST["adelanto"];
+    $observacion = $_POST["observacion"];
+    $total = $_POST["total"];
+    $id_hab = $_POST["id_hab"];
+    $total_descuento = $_POST["total_descuento"];
+    $usuario->crear_reserva($cliente, $documento, $id_hab, $ingreso, $salida, $descuento, $adelanto, $observacion, $total, $total_descuento);
+    $_SESSION["msg-reserva"] = "add-reserva";
+    echo $usuario->mensaje;
+}
+if ($_POST["funcion"] == "cerrar_reserva") {
+    $total_pagar = $_POST["total_pagar"];
+    $id_reserva = $_POST["id_reserva"];
+    $id_hab = $_POST["id_hab"];
+    $fecha_today = $_POST["fecha_today"];
+    $usuario->cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario);
+    echo $usuario->mensaje;
+}
+if ($_POST["funcion"] == "habitacion_limpieza_terminada") {
+    $key = $_POST["key"];
+    $usuario->habitacion_limpieza_terminada($key);
+    echo $usuario->mensaje;
+}
+
+// FIN DE SECTION RESERVAS

@@ -1,5 +1,7 @@
 $(document).ready(function () {
   var funcion = "";
+
+  // Obtener fecha actual
   var fecha = new Date(); //Fecha actual
   var mes = fecha.getMonth() + 1; //obteniendo mes
   var dia = fecha.getDate(); //obteniendo dia
@@ -60,4 +62,163 @@ $(document).ready(function () {
     $("#reserva-total").val(total * resta);
     $("#reserva-total-descuento").val(total * resta - descuento);
   }
+  $("#add-reserva-btn").click(() => {
+    console.log("reservar");
+    funcion = "crear_reserva";
+    let cliente = $("#reserva-cliente").val();
+    let documento = $("#reserva-documento").val();
+    let ingreso = $("#reserva-ingreso").val();
+    let salida = $("#reserva-salida").val();
+    let descuento = $("#reserva-descuento").val();
+    let adelanto = $("#reserva-adelanto").val();
+    let observacion = $("#reserva-observacion").val();
+    let id_hab = $("#get-id").val();
+    let total = $("#reserva-total").val();
+    let total_descuento = $("#reserva-total-descuento").val();
+    console.log(
+      cliente,
+      id_hab,
+      ingreso,
+      salida,
+      descuento,
+      adelanto,
+      observacion,
+      total,
+      documento,
+      total_descuento
+    );
+    if (cliente && id_hab && ingreso && salida && total && total_descuento) {
+      if (
+        $("#reserva-cliente").val() ==
+        "No existen registro de este cliente cree uno nuevo"
+      ) {
+        alert("Falta agregar datos del cliente");
+      } else {
+        $.post(
+          "../../controlador/UsuarioController.php",
+          {
+            funcion,
+            cliente,
+            documento,
+            id_hab,
+            ingreso,
+            salida,
+            descuento,
+            adelanto,
+            observacion,
+            total,
+            total_descuento,
+          },
+          (response) => {
+            console.log(response);
+            if (response.trim() == "add-reserva") {
+              document.location = "../Recepcion";
+            } else {
+              console.log(response);
+            }
+          }
+        );
+      }
+    } else {
+      if ($("#reserva-documento").val() == 0) {
+        alert("falta agregar documento del cliente");
+      } else {
+        if ($("#reserva-cliente").val() == "") {
+          alert("Falta agregar DNI o RUC, para cargar el cliente");
+        } else {
+          alert("algo salio mal recargue la pagina");
+        }
+      }
+    }
+  });
+
+  // section presentation modal
+
+  $("#new_cliente").click(() => {
+    console.log("new client");
+    $(".modal-create-client").removeClass("md-hidden");
+  });
+  $(".form-create-cliente .close-modal").click(() => {
+    $("#tipo-documento-modal").val(0);
+    $("#documento-modal").val("");
+    $("#nombres-modal").val("");
+    $(".modal-create-client").addClass("md-hidden");
+  });
+
+  $("#cancel-form-client").click(() => {
+    $("#tipo-documento-modal").val(0);
+    $("#documento-modal").val("");
+    $("#nombres-modal").val("");
+    $(".modal-create-client").addClass("md-hidden");
+  });
+
+  // fin de presentation modal
+
+  // CHANGE TIPO DE DOCMUENTO
+  $("#reserva-tipo-documento").change(() => {
+    if ($("#reserva-tipo-documento").val() > 0) {
+      $("#reserva-documento").attr("disabled", false);
+    } else {
+      $("#reserva-documento").attr("disabled", "true");
+    }
+    $("#reserva-documento").val("");
+  });
+  // fin de change
+
+  // BUSCAR CLICK CLIENTE
+  $("#btn-search-dni-ruc").click(() => {
+    let tipo_documento = $("#reserva-tipo-documento").val();
+    if (tipo_documento > 0) {
+      if (tipo_documento == 1) {
+        let documento = $("#reserva-documento").val();
+        if (documento.length != 8) {
+          alert("la cantidad de digitos para el dni es incorrecto");
+        } else {
+          funcion = "buscar_cliente";
+          $.post(
+            "../../controlador/UsuarioController.php",
+            { funcion, documento },
+            (response) => {
+              console.log(response);
+              if (
+                response == "No existen registro de este cliente cree uno nuevo"
+              ) {
+                $("#reserva-cliente").val(`${response}`);
+                $("#reserva-cliente").attr("key-documento", "undefined");
+              } else {
+                const clientes = JSON.parse(response);
+
+                clientes.forEach((cliente) => {
+                  $("#reserva-cliente").val(`${cliente.nombres}`);
+                  $("#reserva-cliente").attr(
+                    "key-documento",
+                    `${cliente.documento}`
+                  );
+                });
+              }
+            }
+          );
+        }
+      } else {
+        let documento = $("#reserva-documento").val();
+        if (documento.length != 11) {
+          alert("la cantidad de digitos para el ruc es incorrecto");
+        } else {
+          funcion = "ruc";
+          $.post(
+            "../../components/consultas_api.php",
+            { funcion, documento },
+            (response) => {
+              const clientes = JSON.parse(response);
+
+              $("#reserva-cliente").val(`${clientes.razonSocial}`);
+            }
+          );
+        }
+      }
+    } else {
+      alert("no selecciono el tipo de documento");
+    }
+  });
+  // FIN DE CHANGE
 });

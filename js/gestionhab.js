@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var funcion = "";
+
   buscar_cat_hab();
   buscar_piso_hab();
 

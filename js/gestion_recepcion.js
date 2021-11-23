@@ -1,11 +1,34 @@
 $(document).ready(function () {
   var funcion = "";
+  buscar_piso();
+
   buscar_habitaciones();
-  function buscar_habitaciones() {
-    funcion = "buscar_habitacion";
+
+  function buscar_piso() {
+    funcion = "buscar_piso_hab";
     $.post(
       "../../controlador/UsuarioController.php",
       { funcion },
+      (response) => {
+        let template = "";
+        template += `<option value="0">Seleccione el Piso</option>`;
+        let pisos = JSON.parse(response);
+        pisos.forEach((piso) => {
+          template += `
+          <option value="${piso.id_piso}">${piso.numero_piso}</option>
+          `;
+        });
+        $("#search-piso").html(template);
+      }
+    );
+  }
+
+  function buscar_habitaciones() {
+    funcion = "buscar_habitacion";
+    var id_piso = $("#search-piso").val();
+    $.post(
+      "../../controlador/UsuarioController.php",
+      { funcion, id_piso },
       (response) => {
         let template = "";
         if (response.trim() == "No existen registro de habitaciones") {
@@ -22,37 +45,69 @@ $(document).ready(function () {
                 <h1>Nro: ${habitacion.n_cuarto}</h1>
                 <h1>${habitacion.numero_piso}</h1>
                 <span>${habitacion.nombre_categoria}</span>
-            </div>
-            <div class="footer-card">`;
+            </div>`;
             if (habitacion.estado == "Disponible") {
               template += `
+              <div class="footer-card">
                 <a href="?id=${habitacion.id_habitaciones}&&view=reservar">
                     <span>${habitacion.estado}</span>
                     <ion-icon name="chevron-forward-outline"></ion-icon>
-                </a>`;
+                </a>
+                
+            </div>`;
             }
             if (habitacion.estado == "Ocupado") {
               template += `
-                <a href="../Comprobante/?id=${habitacion.id_habitaciones}">
+              <div class="footer-card">
+                <p >
                     <span>${habitacion.estado}</span>
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
-                </a>`;
+                </p>
+                
+            </div>`;
             }
             if (habitacion.estado == "Limpieza") {
               template += `
-                <a key="${habitacion.id_habitaciones}" id="limpieza-cancel">
+              <div class="footer-card" >
+                <div class="footer-content">
                     <span>${habitacion.estado}</span>
-                    <ion-icon name="chevron-forward-outline"></ion-icon>
-                </a>`;
+                    <ion-icon name="chevron-forward-outline" n_hab="${habitacion.n_cuarto}" key="${habitacion.id_habitaciones}" id="limpieza-cancel"></ion-icon>
+                </div>
+                
+            </div>`;
             }
             template += `
             </div>
-            </div>
             `;
           });
-          $(".list-habitaciones").html(template);
         }
+        $(".list-habitaciones").html(template);
+
+        $("#limpieza-cancel").click((e) => {
+          console.log("click");
+          let key = $(e.target).attr("key");
+          let n_hab = $(e.target).attr("n_hab");
+          console.log(key);
+          var opcion = confirm(
+            `Desea terminar limpieza de habitacion ${n_hab} ?`
+          );
+          if (opcion == true) {
+            funcion = "habitacion_limpieza_terminada";
+            $.post(
+              "../../controlador/UsuarioController.php",
+              { funcion, key },
+              (response) => {
+                console.log(response);
+                buscar_habitaciones();
+              }
+            );
+          } else {
+          }
+        });
       }
     );
   }
+  $("#search-piso").change(() => {
+    let val = $("#search-piso").val();
+    buscar_habitaciones();
+  });
 });

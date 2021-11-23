@@ -22,6 +22,110 @@ session_start();
     <?php
     include_once "../../components/Sidebar.php"
     ?>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../GestionHotel">
+                    <ion-icon name="pie-chart"></ion-icon>
+                    <p>Dashboard</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Recepcion">
+                    <ion-icon name="notifications"></ion-icon>
+                    <p>Recepcion</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Clients">
+                    <ion-icon name="people-sharp"></ion-icon>
+                    <p>Clientes</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop active-link" href="../Habitaciones">
+                    <ion-icon name="bed-outline"></ion-icon>
+                    <p>Habitaciones</p>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Ventas">
+                    <i class="fas fa-dollar-sign"></i>
+                    <p>Ventas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Salidas">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <p>Salidas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Servicios">
+                    <ion-icon name="restaurant-outline"></ion-icon>
+                    <p>Servicio habitacion</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Productos">
+                    <ion-icon name="storefront-outline"></ion-icon>
+                    <p>Productos</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="#">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <p>Reservas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../../controlador/LogoutController.php">
+                    <ion-icon name="chevron-back-circle-sharp"></ion-icon>
+                    <p>Cerrar sesión</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    </ul>
+    </div>
+    </aside>
     <div class="container-dashboard">
         <span class="route">
             > Home > Habitaciones
@@ -186,6 +290,8 @@ session_start();
     </div>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
 <?php if (!empty($_GET["view"])) { ?>

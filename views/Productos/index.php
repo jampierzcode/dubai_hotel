@@ -13,8 +13,8 @@ session_start();
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/navdashboard.css">
     <link rel="stylesheet" href="../../css/container-dashboard.css">
-    <link rel="stylesheet" href="../../css/chart.css">
-    <link rel="stylesheet" href="../../css/gestionhotel.css">
+    <link rel="stylesheet" href="../../css/habitaciones.css">
+    <link rel="stylesheet" href="../../css/productos.css">
     <link rel="icon" href="../../img/logo.jpg">
     <title>Hotel Dubai / Gestion</title>
 </head>
@@ -26,7 +26,7 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop active-link" href="../GestionHotel">
+                <a class="toggle-drop" href="../GestionHotel">
                     <ion-icon name="pie-chart"></ion-icon>
                     <p>Dashboard</p>
                 </a>
@@ -97,7 +97,7 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop" href="../Productos">
+                <a class="toggle-drop active-link" href="../Productos">
                     <ion-icon name="storefront-outline"></ion-icon>
                     <p>Productos</p>
                 </a>
@@ -129,47 +129,72 @@ session_start();
     </aside>
     <div class="container-dashboard">
         <span class="route">
-            > Home
+            > Home > Productos
         </span>
-        <div class="cards-admin">
-            <div class="card-count">
-                <div class="left-card">
-                    <h1>N° Reservas</h1>
-                    <span>20</span>
+
+        <div class="modal-create md-hidden">
+            <div class="form-create">
+                <!-- <form id="form_producto_add"> -->
+                <div class="close-modal">
+                    <ion-icon name="close-circle-outline"></ion-icon>
                 </div>
-                <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-            <div class="card-count">
-                <div class="left-card">
-                    <h1>N° Clientes</h1>
-                    <span>20</span>
+                <h1>Crear Producto</h1>
+                <div class="card-input">
+                    <span>Nombre del producto</span>
+                    <div class="input-group">
+                        <input type="text" id="producto-nombre" placeholder="Ingrese el nombre del producto">
+                    </div>
                 </div>
-                <ion-icon name="people-outline"></ion-icon>
-            </div>
-            <div class="card-count">
-                <div class="left-card">
-                    <h1>N° Habitaciones</h1>
-                    <span>20</span>
+                <div class="card-input">
+                    <span>Precio</span>
+                    <div class="input-group">
+                        <input type="number" id="producto-precio" placeholder="Ingrese el precio del producto">
+                    </div>
                 </div>
-                <ion-icon name="bed-outline"></ion-icon>
-            </div>
-            <div class="card-count ventas">
-                <div class="left-card">
-                    <h1>Venta Total</h1>
-                    <span>S/16 000.00</span>
+                <div class="card-input">
+                    <span>Stock</span>
+                    <div class="input-group">
+                        <input type="number" id="producto-inventario" placeholder="Ingrese la cantidad de productos en tienda">
+                    </div>
                 </div>
-                <ion-icon name="cash-outline"></ion-icon>
+                <!-- <div class="card-input">
+                        <span>Imagen</span>
+                        <div class="input-group">
+                            <input type="file" name="imagen_producto" id="producto-image">
+                            <input type="hidden" name="funcion" value="subir_foto_producto">
+                        </div>
+                    </div> -->
+                <div class="card-input buttons-modal">
+                    <button id="cancel-form" class="btn-cancel">Cancelar</button>
+                    <button id="add-producto-form" class="btn-create">Crear</button>
+                </div>
+                <!-- </form> -->
             </div>
         </div>
-        <canvas id="myChart" width="150"></canvas>
+        <div class="create-productos">
+            <button id="create-productos" class="btn-add">+ Crear</button>
+        </div>
+        <div class="list-productos">
+            <p>Lista de productos</p>
+            <div class="productos-header-table">
+                <p class=" campo_tabla">Nombre</p>
+                <p class="campo_tabla">Precio</p>
+                <p class="campo_tabla">Stock</p>
+                <p class="campo_tabla">Actions</p>
+            </div>
+            <div id="productos-body-table">
+            </div>
+        </div>
+
+    </div>
     </div>
 </body>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../../js/graficos-admin.js"></script>
+<script src="../../js/gestion-productos.js"></script>
 
 </html>
