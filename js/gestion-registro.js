@@ -63,7 +63,6 @@ $(document).ready(function () {
     $("#reserva-total-descuento").val(total * resta - descuento);
   }
   $("#add-reserva-btn").click(() => {
-    console.log("reservar");
     funcion = "crear_reserva";
     let cliente = $("#reserva-cliente").val();
     let documento = $("#reserva-documento").val();
@@ -75,18 +74,6 @@ $(document).ready(function () {
     let id_hab = $("#get-id").val();
     let total = $("#reserva-total").val();
     let total_descuento = $("#reserva-total-descuento").val();
-    console.log(
-      cliente,
-      id_hab,
-      ingreso,
-      salida,
-      descuento,
-      adelanto,
-      observacion,
-      total,
-      documento,
-      total_descuento
-    );
     if (cliente && id_hab && ingreso && salida && total && total_descuento) {
       if (
         $("#reserva-cliente").val() ==
@@ -110,11 +97,10 @@ $(document).ready(function () {
             total_descuento,
           },
           (response) => {
-            console.log(response);
             if (response.trim() == "add-reserva") {
               document.location = "../Recepcion";
             } else {
-              console.log(response);
+              alert("No se registro la reserva");
             }
           }
         );
@@ -135,7 +121,6 @@ $(document).ready(function () {
   // section presentation modal
 
   $("#new_cliente").click(() => {
-    console.log("new client");
     $(".modal-create-client").removeClass("md-hidden");
   });
   $(".form-create-cliente .close-modal").click(() => {
@@ -179,7 +164,6 @@ $(document).ready(function () {
             "../../controlador/UsuarioController.php",
             { funcion, documento },
             (response) => {
-              console.log(response);
               if (
                 response == "No existen registro de este cliente cree uno nuevo"
               ) {
@@ -221,4 +205,41 @@ $(document).ready(function () {
     }
   });
   // FIN DE CHANGE
+
+  // Crear cliente
+  $("#tipo-documento-modal").change(() => {
+    if ($("#tipo-documento-modal").val() > 0) {
+      $("#documento-modal").attr("disabled", false);
+    } else {
+      $("#documento-modal").attr("disabled", "true");
+    }
+    $("#documento-modal").val("");
+  });
+
+  $("#add-client-form").click(() => {
+    funcion = "add_cliente";
+    let tipo_documento = $("#tipo-documento-modal").val();
+    let documento = $("#documento-modal").val();
+    let nombres = $("#nombres-modal").val();
+    // if ((tipo_documento && $documento, $nombres)) {
+    //   if (tipo_documento == 0) {
+    //     alert("Escoja el tipo de documento");
+    //   }
+    // } else {
+    //   alert("Le faltan agregar campos en el formulario");
+    // }
+    console.log(tipo_documento);
+    console.log(documento);
+    console.log(nombres);
+    $.post(
+      "../../controlador/UsuarioController.php",
+      { funcion, tipo_documento, documento, nombres },
+      (response) => {
+        console.log(response);
+        if (response.trim() == "add-cliente") {
+          alert("Cliente agregado correctamente");
+        }
+      }
+    );
+  });
 });

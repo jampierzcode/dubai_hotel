@@ -287,3 +287,19 @@ if ($_POST["funcion"] == "habitacion_limpieza_terminada") {
 }
 
 // FIN DE SECTION RESERVAS
+
+// SECTION DE CLIENTES CREAR CLIENTES DESDE RECEPCION
+
+if ($_POST["funcion"] == "add_cliente") {
+    $tipo_documento = $_POST["tipo_documento"];
+    $documento = $_POST["documento"];
+    $nombres = $_POST["nombres"];
+    if ($tipo_documento == 1) {
+        $documento_tipo = "DNI";
+    } else {
+        $documento_tipo = "RUC";
+    }
+    $usuario->add_cliente($documento_tipo, $documento, $nombres);
+    echo $usuario->mensaje;
+}
+// FIN DE SECTION DE CLIENTES CREAR CLIENTES DESDE RECEPCION

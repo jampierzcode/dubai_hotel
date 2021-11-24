@@ -179,7 +179,7 @@ session_start();
                             <span>Documento</span>
                             <div class="input-group">
                                 <i class="fas fa-address-card"></i>
-                                <input id="documento-modal" type="number" placeholder="Ingrese el numero">
+                                <input id="documento-modal" disabled type="number" placeholder="Ingrese el numero">
                             </div>
                         </div>
                         <div class="card-input">

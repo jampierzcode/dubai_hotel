@@ -268,6 +268,29 @@ class Usuario
             return $this->mensaje;
         }
     }
+    function add_cliente($documento_tipo, $documento, $nombres)
+    {
+        $sql = "SELECT id_cliente, nombres, documento FROM cliente WHERE documento=:documento";
+        $query = $this->conexion->prepare($sql);
+        $query->execute(array(":documento" => $documento));
+        $this->datos = $query->fetchAll(); // retorna objetos o no
+        if (!empty($this->datos)) {
+
+            $this->mensaje = "Existe el cliente";
+            return $this->mensaje;
+        } else {
+            try {
+                $sql = "INSERT INTO cliente(nombres, tipo_documento, documento) VALUES(:nombres, :tipo_documento, :documento)";
+                $query = $this->conexion->prepare($sql);
+                $query->execute(array(":nombres" => $nombres, ":tipo_documento" => $documento_tipo, ":documento" => $documento));
+                $this->mensaje = "add-cliente";
+                return $this->mensaje;
+            } catch (\Throwable $error) {
+                $this->mensaje = "no-add-cliente" . $error;
+                return $this->mensaje;
+            }
+        }
+    }
     // FIN DE SECTION DE CLIENTES
 
     // SECTION DE RESERVAS
