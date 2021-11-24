@@ -8,7 +8,6 @@ $(document).ready(function () {
       "../../controlador/UsuarioController.php",
       { funcion },
       (response) => {
-        console.log(response);
         let template = "";
         if (response.trim() == "No existen productos creados") {
           template += `${response}`;
@@ -19,20 +18,45 @@ $(document).ready(function () {
                 <div class="card-product">
                 <p class="campo_tabla">${producto.nombre}
                 </p>
-                <p class="campo_tabla">s/${producto.precio}</p>
+                <p class="campo_tabla">s/${Number(producto.precio).toFixed(
+                  2
+                )}</p>
                 <p class="campo_tabla">${producto.inventario} und</p>
                 <div class="actions-button-products">
-                    <button class="btn-edit">
-                        <ion-icon name="pencil-sharp"></ion-icon>
+                    <button class="btn-edit" id="edit_product">
+                        <ion-icon name="pencil-sharp"  key_product="${
+                          producto.id_productos
+                        }"></ion-icon>
                     </button>
-                    <button class="btn-remove">
-                        <ion-icon name="trash-sharp"></ion-icon>
+                    <button class="btn-remove" id="remove_product">
+                    <i class="fas fa-trash-alt"  key_product="${
+                      producto.id_productos
+                    }"></i>
                     </button>
                 </div>
             </div>
                 `;
           });
           $("#productos-body-table").html(template);
+
+          // REMOVE PRODUCTOS
+          $(".actions-button-products .btn-remove#remove_product").click(
+            (e) => {
+              funcion = "borrar_producto";
+              let id_producto = $(e.target).attr("key_product");
+              $.post(
+                "../../controlador/UsuarioController.php",
+                { funcion, id_producto },
+                (response) => {
+                  if (response.trim() == "remove-producto") {
+                    buscar_productos();
+                  } else {
+                    alert("No se pudo eliminar el producto");
+                  }
+                }
+              );
+            }
+          );
         }
       }
     );

@@ -100,3 +100,32 @@ td > ion-icon {
 table tr:nth-child(1) {
   background: #fff !important;
 }
+#clientes-body-table > .card-product {
+  padding: 10px 0px;
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  font-size: 14px;
+}
+#clientes-body-table > .card-product:nth-child(2n + 1) {
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
+}
+#clientes-body-table > .card-product > .campo_tabla {
+  display: flex;
+  align-items: center;
+}
+#clientes-body-table > .card-product > .actions-button-products > button {
+  padding: 4px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#clientes-body-table
+  > .card-product
+  > .actions-button-products
+  > button.btn-remove {
+  background: #d24444;
+  color: #fff;
+}

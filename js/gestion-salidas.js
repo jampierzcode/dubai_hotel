@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var funcion = "";
+  var carrito_consumo = [];
   buscar_reserva();
 
   function buscar_reserva() {
@@ -110,6 +111,11 @@ $(document).ready(function () {
             if (detail_consumo.estado_pago == "PAGADO") {
               template += `<p class="column_valors pay">${detail_consumo.estado_pago}</p>`;
             } else {
+              let json_producto = {
+                id: detail_consumo.id_detalle_venta,
+              };
+
+              carrito_consumo.push(json_producto);
               suma_porpagar = suma_porpagar + subtotal;
               template += `<p class="column_valors no_pay">${detail_consumo.estado_pago}</p>`;
             }
@@ -156,12 +162,22 @@ $(document).ready(function () {
     if (dia < 10) dia = "0" + dia; //agrega cero si el menor de 10
     if (mes < 10) mes = "0" + mes; //agrega cero si el menor de 10
     let fecha_today = ano + "-" + mes + "-" + dia;
+    // console.log(carrito_consumo);
     $.post(
       "../../controlador/UsuarioController.php",
-      { funcion, total_pagar, id_hab, id_reserva, fecha_today },
+      {
+        funcion,
+        total_pagar,
+        id_hab,
+        id_reserva,
+        fecha_today,
+        carrito_consumo,
+      },
       (response) => {
         console.log(response);
         alert(response);
+
+        document.location = "../Recepcion";
       }
     );
   });

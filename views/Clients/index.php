@@ -13,6 +13,8 @@ session_start();
     <link rel="stylesheet" href="../../css/sidebar.css">
     <link rel="stylesheet" href="../../css/navdashboard.css">
     <link rel="stylesheet" href="../../css/container-dashboard.css">
+    <link rel="stylesheet" href="../../css/habitaciones.css">
+    <link rel="stylesheet" href="../../css/productos.css">
     <link rel="stylesheet" href="../../css/clientes.css">
     <link rel="icon" href="../../img/logo.jpg">
     <title>Hotel Dubai / Gestion</title>
@@ -22,93 +24,168 @@ session_start();
     <?php
     include_once "../../components/Sidebar.php"
     ?>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../GestionHotel">
+                    <ion-icon name="pie-chart"></ion-icon>
+                    <p>Dashboard</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Recepcion">
+                    <ion-icon name="notifications"></ion-icon>
+                    <p>Recepcion</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop active-link" href="../Clients">
+                    <ion-icon name="people-sharp"></ion-icon>
+                    <p>Clientes</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Habitaciones">
+                    <ion-icon name="bed-outline"></ion-icon>
+                    <p>Habitaciones</p>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Ventas">
+                    <i class="fas fa-dollar-sign"></i>
+                    <p>Ventas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Salidas">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    <p>Salidas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../Productos">
+                    <ion-icon name="storefront-outline"></ion-icon>
+                    <p>Productos</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="#">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <p>Reservas</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="links-menu-dashboard">
+        <div class="link-block">
+            <div class="left-link">
+                <a class="toggle-drop" href="../../controlador/LogoutController.php">
+                    <ion-icon name="chevron-back-circle-sharp"></ion-icon>
+                    <p>Cerrar sesión</p>
+                </a>
+            </div>
+        </div>
+    </li>
+    </ul>
+    </div>
+    </aside>
     <div class="container-dashboard">
         <span class="route">
-            > Home > CLientes
+            > Home > Clientes
         </span>
-        <div class="links-container">
-            <a href="#" id="ancla-add" class="btn-add">
-                + Nuevo Cliente
-            </a>
-        </div>
-        <div class="create-clients hidden">
-            <div class="form-add" id="form-clients">
-                <div class="content-form">
-                    <div class="group-date">
 
-                        <span>Nombres y Apellidos</span>
-                        <input id="client-names" type="text" placeholder="Ingresa el nombre del cliente">
-                    </div>
-                    <div class="group-date">
-                        <span>DNI</span>
-                        <input id="client-dni" type="number" placeholder="Ingresa el dni del cliente">
-                    </div>
-                    <div class="group-date">
-                        <span>Correo</span>
-                        <input id="client-email" type="email" placeholder="Ingresa el @correo del cliente">
-                    </div>
-                    <div class="group-date">
-                        <span>Telefono</span>
-                        <input id="client-phone" type="number" placeholder="Ingresa el telefono del cliente">
-                    </div>
-                    <div class="group-date">
-                        <span>Pais</span>
-                        <input id="client-pais" type="text" placeholder="Ingresa el pais del cliente">
+        <div class="modal-create md-hidden">
+            <div class="form-create">
+                <!-- <form id="form_producto_add"> -->
+                <div class="close-modal">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <h1>Crear Cliente</h1>
+                <div class="card-input">
+                    <span>Tipo de documento</span>
+                    <div class="input-group">
+                        <select name="type-register" id="tipo-documento-modal">
+                            <option value="0">Seleccione el tipo de documento</option>
+                            <option value="1">DNI</option>
+                            <option value="2">RUC</option>
+                        </select>
                     </div>
                 </div>
-                <div class="actions-button">
-                    <button id="client-btn-add" class="btn-add-create">Agregar</button>
-                    <button class="btn-cancel-create">Cancelar</button>
+                <div class="card-input">
+                    <span>Documento</span>
+                    <div class="input-group">
+                        <i class="fas fa-address-card"></i>
+                        <input id="documento-modal" disabled type="number" placeholder="Ingrese el numero">
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="table-container">
+                <div class="card-input">
+                    <span>Nombres</span>
+                    <div class="input-group">
 
-            <div class="section-search">
-                <input type="text" placeholder="Ingrese el nombre del cliente">
-                <ion-icon id="search-btn" name="search-sharp"></ion-icon>
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        <input id="nombres-modal" type="text" placeholder="Ingrese los nombres o razon social">
+                    </div>
+                </div>
+                <div class="card-input buttons-modal">
+                    <button id="cancel-form" class="btn-cancel">Cancelar</button>
+                    <button id="add-cliente-form" class="btn-create">Crear</button>
+                </div>
+                <!-- </form> -->
             </div>
-            <table>
-                <tr>
-                    <th># id</th>
-                    <th>Nombres y Apellidos</th>
-                    <th>Telefono</th>
-                    <th>Correo</th>
-                    <th>DNI</th>
-                    <th>Pais</th>
-                    <th>Actions</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>JampierSmith Vasquez Mija</td>
-                    <td>+51 915096462</td>
-                    <td>jampierv127@gmail.com</td>
-                    <td>74421968</td>
-                    <td>Peru</td>
-                    <td>
-                        <ion-icon id="edit-client" name="pencil-sharp"></ion-icon>
-                        <ion-icon id="remove-client" name="trash"></ion-icon>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Hector Emilio</td>
-                    <td>+51 915096462</td>
-                    <td>hectoremilio@gmail.com</td>
-                    <td>29236044</td>
-                    <td>Peru</td>
-                    <td>
-                        <ion-icon id="edit-client" name="pencil-sharp"></ion-icon>
-                        <ion-icon id="remove-client" name="trash"></ion-icon>
-                    </td>
-                </tr>
-            </table>
         </div>
+        <div class="create-productos">
+            <button id="create-clients" class="btn-add">+ Crear</button>
+        </div>
+        <div class="list-productos">
+            <p>Lista de clientes</p>
+            <div class="productos-header-table">
+                <p class=" campo_tabla">Nombres / Razon Social</p>
+                <p class="campo_tabla">Tipo Documento</p>
+                <p class="campo_tabla">Documento</p>
+                <p class="campo_tabla">Acciones</p>
+            </div>
+            <div id="clientes-body-table">
+            </div>
+        </div>
+
+    </div>
     </div>
 </body>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
-<script src="../../js/gestionclient.js"></script>
+<script src="../../js/gestion-clientes.js"></script>
 
 </html>

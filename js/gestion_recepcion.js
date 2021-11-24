@@ -82,7 +82,7 @@ $(document).ready(function () {
         }
         $(".list-habitaciones").html(template);
 
-        $("#limpieza-cancel").click((e) => {
+        $("ion-icon#limpieza-cancel").click((e) => {
           console.log("click");
           let key = $(e.target).attr("key");
           let n_hab = $(e.target).attr("n_hab");

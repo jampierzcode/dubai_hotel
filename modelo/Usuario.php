@@ -181,7 +181,7 @@ class Usuario
     }
     function buscar_detail_consumo($id_reserva)
     {
-        $sql = "SELECT RE.cantidad, RE.estado_pago, RE.subtotal, PRO.nombre, PRO.precio FROM detalle_venta as RE inner join productos as PRO on RE.id_producto=PRO.id_productos WHERE id_reserva=:id_reserva";
+        $sql = "SELECT RE.id_detalle_venta, RE.cantidad, RE.estado_pago, RE.subtotal, PRO.nombre, PRO.precio FROM detalle_venta as RE inner join productos as PRO on RE.id_producto=PRO.id_productos WHERE id_reserva=:id_reserva";
         $query = $this->conexion->prepare($sql);
         $query->execute(array(":id_reserva" => $id_reserva));
         $this->datos = $query->fetchAll(); // retorna objetos o no
@@ -221,6 +221,19 @@ class Usuario
             return $this->datos;
         } else {
             $this->mensaje = "No existen productos creados";
+            return $this->mensaje;
+        }
+    }
+    function borrar_producto($id_producto)
+    {
+        $sql = "DELETE FROM productos WHERE id_productos=:id_productos";
+        $query = $this->conexion->prepare($sql);
+        try {
+            $query->execute(array(":id_productos" => $id_producto));
+            $this->mensaje = "remove-producto";
+            return $this->mensaje;
+        } catch (\Throwable $error) {
+            $this->mensaje = "no-remove-producto";
             return $this->mensaje;
         }
     }
@@ -291,6 +304,23 @@ class Usuario
             }
         }
     }
+    // GESTION DE CLIENTES USCAR CLIENTE
+
+    function buscar_clientes()
+    {
+        try {
+            $sql = "SELECT * FROM cliente";
+            $query = $this->conexion->prepare($sql);
+            $query->execute();
+            $this->datos = $query->fetchAll(); // retorna objetos o no
+            return $this->datos;
+        } catch (\Throwable $error) {
+            $this->mensaje = "no-register-cliente";
+            return $this->mensaje;
+            //throw $th;
+        }
+    }
+
     // FIN DE SECTION DE CLIENTES
 
     // SECTION DE RESERVAS
@@ -311,7 +341,7 @@ class Usuario
             return $this->mensaje;
         }
     }
-    function cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario)
+    function cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario, $carrito_consumo)
     {
         $sql = "INSERT INTO ventas(id_usuario, id_reserva, total, fecha) VALUES (:id_usuario, :id_reserva, :total, :fecha)";
         $query = $this->conexion->prepare($sql);
@@ -321,7 +351,22 @@ class Usuario
 
             $sql = "UPDATE habitaciones SET estado=:estado WHERE id_habitaciones=:id_hab";
             $query = $this->conexion->prepare($sql);
-            $query->execute(array(":estado" => 3, "id_hab" => $id_hab));
+            $query->execute(array(":estado" => 3, ":id_hab" => $id_hab));
+
+
+            // ACTUALIZAR ESTADO DE LA RESERVA
+            $sql = "UPDATE reservas SET estado_reserva=:estado_reserva WHERE id_reservas=:id_reserva";
+            $query = $this->conexion->prepare($sql);
+            $query->execute(array(":estado_reserva" => "finalizado", ":id_reserva" => $id_reserva));
+
+            // ACTUALIZAR ESTADO DE DETALLES DE VENTA
+            $length = count($carrito_consumo);
+            for ($i = 0; $i < $length; $i++) {
+                $sql = "UPDATE detalle_venta SET estado_pago=:estado_pago WHERE id_detalle_venta=:id_detalle_venta";
+                $query = $this->conexion->prepare($sql);
+                $query->execute(array(":estado_pago" => "PAGADO", ":id_detalle_venta" => $carrito_consumo[$i]["id"]));
+            }
+
             return $this->mensaje;
         } catch (\Throwable $error) {
             $this->mensaje = "no-add-reserva" . $error;

@@ -87,16 +87,6 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop" href="../Servicios">
-                    <ion-icon name="restaurant-outline"></ion-icon>
-                    <p>Servicio habitacion</p>
-                </a>
-            </div>
-        </div>
-    </li>
-    <li class="links-menu-dashboard">
-        <div class="link-block">
-            <div class="left-link">
                 <a class="toggle-drop active-link" href="../Productos">
                     <ion-icon name="storefront-outline"></ion-icon>
                     <p>Productos</p>

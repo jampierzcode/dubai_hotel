@@ -89,6 +89,7 @@ if ($_POST["funcion"] == "buscar_detail_consumo") {
     if ($usuario->datos) {
         foreach ($usuario->datos as $dato) {
             $json[] = array(
+                'id_detalle_venta' => $dato->id_detalle_venta,
                 'cantidad' => $dato->cantidad,
                 'estado_pago' => $dato->estado_pago,
                 'subtotal' => $dato->subtotal,
@@ -140,6 +141,11 @@ if ($_POST["funcion"] == "buscar_productos") {
         $jsonstring = json_encode($json);
         echo $jsonstring;
     }
+}
+if ($_POST["funcion"] == "borrar_producto") {
+    $id_producto = $_POST["id_producto"];
+    $usuario->borrar_producto($id_producto);
+    echo $usuario->mensaje;
 }
 // FIN DE SECTION PRODUCTOS
 
@@ -274,10 +280,11 @@ if ($_POST["funcion"] == "crear_reserva") {
 }
 if ($_POST["funcion"] == "cerrar_reserva") {
     $total_pagar = $_POST["total_pagar"];
+    $carrito_consumo = $_POST["carrito_consumo"];
     $id_reserva = $_POST["id_reserva"];
     $id_hab = $_POST["id_hab"];
     $fecha_today = $_POST["fecha_today"];
-    $usuario->cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario);
+    $usuario->cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario, $carrito_consumo);
     echo $usuario->mensaje;
 }
 if ($_POST["funcion"] == "habitacion_limpieza_terminada") {
@@ -288,7 +295,8 @@ if ($_POST["funcion"] == "habitacion_limpieza_terminada") {
 
 // FIN DE SECTION RESERVAS
 
-// SECTION DE CLIENTES CREAR CLIENTES DESDE RECEPCION
+// SECTION DE CLIENTES 
+// CREAR CLIENTES DESDE RECEPCION
 
 if ($_POST["funcion"] == "add_cliente") {
     $tipo_documento = $_POST["tipo_documento"];
@@ -302,4 +310,27 @@ if ($_POST["funcion"] == "add_cliente") {
     $usuario->add_cliente($documento_tipo, $documento, $nombres);
     echo $usuario->mensaje;
 }
+// BUSCAR CLIENTES
+
+
+if ($_POST["funcion"] == "buscar_clientes") {
+    $json = array();
+    $usuario->buscar_clientes();
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_cliente' => $dato->id_cliente,
+                'nombres' => $dato->nombres,
+                'tipo_documento' => $dato->tipo_documento,
+                'documento' => $dato->documento
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+
 // FIN DE SECTION DE CLIENTES CREAR CLIENTES DESDE RECEPCION
