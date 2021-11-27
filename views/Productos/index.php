@@ -122,11 +122,11 @@ session_start();
             > Home > Productos
         </span>
 
-        <div class="modal-create md-hidden">
+        <div id="modal-create-product" class="modal-create md-hidden">
             <div class="form-create">
                 <!-- <form id="form_producto_add"> -->
                 <div class="close-modal">
-                    <ion-icon name="close-circle-outline"></ion-icon>
+                    <ion-icon name="close-outline"></ion-icon>
                 </div>
                 <h1>Crear Producto</h1>
                 <div class="card-input">
@@ -157,6 +157,38 @@ session_start();
                 <div class="card-input buttons-modal">
                     <button id="cancel-form" class="btn-cancel">Cancelar</button>
                     <button id="add-producto-form" class="btn-create">Crear</button>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+        <div id="modal-edit-product" class="modal-create md-hidden">
+            <div class="form-create">
+                <!-- <form id="form_producto_add"> -->
+                <div class="close-modal">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <h1>Editar Producto</h1>
+                <div class="card-input">
+                    <span>Nombre del producto</span>
+                    <div class="input-group">
+                        <input type="text" id="producto-nombre" placeholder="Ingrese el nombre del producto">
+                    </div>
+                </div>
+                <div class="card-input">
+                    <span>Precio</span>
+                    <div class="input-group">
+                        <input type="number" id="producto-precio" placeholder="Ingrese el precio del producto">
+                    </div>
+                </div>
+                <div class="card-input">
+                    <span>Stock</span>
+                    <div class="input-group">
+                        <input type="number" id="producto-inventario" placeholder="Ingrese la cantidad de productos en tienda">
+                    </div>
+                </div>
+                <div class="card-input buttons-modal">
+                    <button id="cancel-form" class="btn-cancel">Cancelar</button>
+                    <button id="update-producto-form" class="btn-create">Actualizar</button>
                 </div>
                 <!-- </form> -->
             </div>

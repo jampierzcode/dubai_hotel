@@ -127,7 +127,7 @@ session_start();
             <div class="form-create">
                 <!-- <form id="form_producto_add"> -->
                 <div class="close-modal">
-                    <ion-icon name="close-circle-outline"></ion-icon>
+                    <ion-icon name="close-outline"></ion-icon>
                 </div>
                 <h1>Crear Cliente</h1>
                 <div class="card-input">

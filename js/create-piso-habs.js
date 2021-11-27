@@ -21,7 +21,7 @@ $(document).ready(function () {
       if (!piso_nombre) {
         template += "Falta registrar nombre ";
       }
-      console.log(template);
+      alert(template);
     }
   });
 });

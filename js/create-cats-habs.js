@@ -26,7 +26,7 @@ $(document).ready(function () {
       if (!categoria_precio) {
         template += "Falta registrar precio";
       }
-      console.log(template);
+      alert(template);
     }
   });
 });

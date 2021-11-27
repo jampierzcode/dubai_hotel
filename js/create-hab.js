@@ -90,7 +90,7 @@ $(document).ready(function () {
       if (habs_cat == 0) {
         template += "Falta registrar categorias";
       }
-      console.log(template);
+      alert(template);
     }
   });
 });

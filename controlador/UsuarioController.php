@@ -142,9 +142,37 @@ if ($_POST["funcion"] == "buscar_productos") {
         echo $jsonstring;
     }
 }
+if ($_POST["funcion"] == "buscar_producto_id") {
+    $id_producto = $_POST["id_producto"];
+    $json = array();
+    $usuario->buscar_producto_id($id_producto);
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_productos' => $dato->id_productos,
+                'nombre' => $dato->nombre,
+                'precio' => $dato->precio,
+                'inventario' => $dato->inventario
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
 if ($_POST["funcion"] == "borrar_producto") {
     $id_producto = $_POST["id_producto"];
     $usuario->borrar_producto($id_producto);
+    echo $usuario->mensaje;
+}
+if ($_POST["funcion"] == "edit_producto") {
+    $id_producto = $_POST["id_producto"];
+    $nombre = $_POST["nombre"];
+    $precio = $_POST["precio"];
+    $inventario = $_POST["inventario"];
+    $usuario->edit_producto($id_producto, $nombre, $precio, $inventario);
     echo $usuario->mensaje;
 }
 // FIN DE SECTION PRODUCTOS

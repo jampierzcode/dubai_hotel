@@ -83,10 +83,8 @@ $(document).ready(function () {
         $(".list-habitaciones").html(template);
 
         $("ion-icon#limpieza-cancel").click((e) => {
-          console.log("click");
           let key = $(e.target).attr("key");
           let n_hab = $(e.target).attr("n_hab");
-          console.log(key);
           var opcion = confirm(
             `Desea terminar limpieza de habitacion ${n_hab} ?`
           );
@@ -96,7 +94,6 @@ $(document).ready(function () {
               "../../controlador/UsuarioController.php",
               { funcion, key },
               (response) => {
-                console.log(response);
                 buscar_habitaciones();
               }
             );

@@ -210,6 +210,19 @@ class Usuario
             return $this->mensaje;
         }
     }
+    function edit_producto($id_producto, $nombre, $precio, $inventario)
+    {
+        $sql = "UPDATE productos SET nombre=:nombre, precio=:precio, inventario=:inventario WHERE id_productos=:id_producto";
+        $query = $this->conexion->prepare($sql);
+        try {
+            $query->execute(array(":id_producto" => $id_producto, ":nombre" => $nombre, ":precio" => $precio, ":inventario" => $inventario));
+            $this->mensaje = "update-producto";
+            return $this->mensaje;
+        } catch (\Throwable $error) {
+            $this->mensaje = "no-update-producto" . $error;
+            return $this->mensaje;
+        }
+    }
     function buscar_productos()
     {
         $sql = "SELECT * FROM productos";
@@ -220,7 +233,21 @@ class Usuario
 
             return $this->datos;
         } else {
-            $this->mensaje = "No existen productos creados";
+            $this->mensaje = "no-create-products";
+            return $this->mensaje;
+        }
+    }
+    function buscar_producto_id($id_producto)
+    {
+        $sql = "SELECT * FROM productos WHERE id_productos=:id_producto";
+        $query = $this->conexion->prepare($sql);
+        $query->execute(array(":id_producto" => $id_producto));
+        $this->datos = $query->fetchAll(); // retorna objetos o no
+        if (!empty($this->datos)) {
+
+            return $this->datos;
+        } else {
+            $this->mensaje = "no-existe-products";
             return $this->mensaje;
         }
     }

@@ -9,8 +9,8 @@ $(document).ready(function () {
       { funcion },
       (response) => {
         let template = "";
-        if (response.trim() == "No existen productos creados") {
-          template += `${response}`;
+        if (response.trim() == "no-create-products") {
+          template += "No eisten registros de productos";
         } else {
           const productos = JSON.parse(response);
           productos.forEach((producto) => {
@@ -37,48 +37,122 @@ $(document).ready(function () {
             </div>
                 `;
           });
-          $("#productos-body-table").html(template);
-
-          // REMOVE PRODUCTOS
-          $(".actions-button-products .btn-remove#remove_product").click(
-            (e) => {
-              funcion = "borrar_producto";
-              let id_producto = $(e.target).attr("key_product");
-              $.post(
-                "../../controlador/UsuarioController.php",
-                { funcion, id_producto },
-                (response) => {
-                  if (response.trim() == "remove-producto") {
-                    buscar_productos();
-                  } else {
-                    alert("No se pudo eliminar el producto");
-                  }
-                }
-              );
-            }
-          );
         }
+
+        $("#productos-body-table").html(template);
       }
     );
   }
 
-  // MODAL SHOW
+  // REMOVE PRODUCTOS
+  $(document).on(
+    "click",
+    ".actions-button-products .btn-remove#remove_product",
+    (e) => {
+      funcion = "borrar_producto";
+      let id_producto = $(e.target).attr("key_product");
+      console.log(id_producto);
+      $.post(
+        "../../controlador/UsuarioController.php",
+        { funcion, id_producto },
+        (response) => {
+          console.log(response);
+          if (response.trim() == "remove-producto") {
+            buscar_productos();
+          } else {
+            alert("No se pudo eliminar el producto");
+          }
+        }
+      );
+    }
+  );
+  //  EDIT PRODUCTOS
+  $(document).on(
+    "click",
+    ".actions-button-products .btn-edit#edit_product",
+    (e) => {
+      $("#modal-edit-product").removeClass("md-hidden");
+      funcion = "buscar_producto_id";
+      let id_producto = $(e.target).attr("key_product");
+      $.post(
+        "../../controlador/UsuarioController.php",
+        { funcion, id_producto },
+        (response) => {
+          const producto = JSON.parse(response);
+          producto.forEach((element) => {
+            $("#modal-edit-product").attr(
+              "key_producto",
+              `${element.id_productos}`
+            );
+            $("#modal-edit-product #producto-nombre").val(`${element.nombre}`);
+            $("#modal-edit-product #producto-precio").val(`${element.precio}`);
+            $("#modal-edit-product #producto-inventario").val(
+              `${element.inventario}`
+            );
+          });
+        }
+      );
+    }
+  );
+  $(document).on("click", "#update-producto-form", (e) => {
+    funcion = "edit_producto";
+    let id_producto = $("#modal-edit-product").attr("key_producto");
+    let nombre = $("#modal-edit-product #producto-nombre").val();
+    let precio = $("#modal-edit-product #producto-precio").val();
+    let inventario = $("#modal-edit-product #producto-inventario").val();
+    $.post(
+      "../../controlador/UsuarioController.php",
+      { funcion, id_producto, nombre, precio, inventario },
+      (response) => {
+        if (response.trim() == "update-producto") {
+          buscar_productos();
+          alert("Producto actualizado correctamente");
+          $("#modal-edit-product").addClass("md-hidden");
+
+          $("#modal-edit-product #producto-nombre").val("");
+          $("#modal-edit-product #producto-precio").val("");
+          $("#modal-edit-product #producto-inventario").val("");
+        } else {
+          alert(
+            "No se pudo actualizar el producto, revise conexion a internet"
+          );
+        }
+      }
+    );
+  });
+
+  // MODAL SHOW CREATE
   $("#create-productos").click(() => {
-    $(".modal-create").removeClass("md-hidden");
+    $("#modal-create-product").removeClass("md-hidden");
   });
   $(".close-modal").click(() => {
-    $(".modal-create").addClass("md-hidden");
+    $("#modal-create-product").addClass("md-hidden");
 
-    $("#producto-nombre").val("");
-    $("#producto-precio").val("");
-    $("#producto-inventario").val("");
+    $("#modal-create-product #producto-nombre").val("");
+    $("#modal-create-product #producto-precio").val("");
+    $("#modal-create-product #producto-inventario").val("");
   });
-  $("#cancel-form").click(() => {
-    $(".modal-create").addClass("md-hidden");
+  $("#modal-create-product #cancel-form").click(() => {
+    $("#modal-create-product").addClass("md-hidden");
 
-    $("#producto-nombre").val("");
-    $("#producto-precio").val("");
-    $("#producto-inventario").val("");
+    $("#modal-create-product #producto-nombre").val("");
+    $("#modal-create-product #producto-precio").val("");
+    $("#modal-create-product #producto-inventario").val("");
+  });
+  // MODAL SHOW EDIT
+  $("#modal-edit-product .close-modal").click(() => {
+    $("#modal-edit-product").addClass("md-hidden");
+
+    $("#modal-edit-product #producto-nombre").val("");
+    $("#modal-edit-product #producto-precio").val("");
+    $("#modal-edit-product #producto-inventario").val("");
+  });
+  $("#modal-edit-product #cancel-form").click(() => {
+    $("#modal-edit-product").addClass("md-hidden");
+
+    $("#modal-edit-product #producto-nombre").val("");
+    $("#modal-edit-product #producto-precio").val("");
+    $("#modal-edit-product #producto-inventario").val("");
   });
 
   // FIN DE MODAL SHOW
@@ -93,7 +167,6 @@ $(document).ready(function () {
     let inventario = $("#producto-inventario").val();
 
     if ((nombre, precio, inventario)) {
-      console.log(nombre, precio, inventario);
       $.post(
         "../../controlador/UsuarioController.php",
         { funcion, nombre, precio, inventario },
