@@ -5,6 +5,26 @@ session_start();
 $id_usuario = $_SESSION['id_usuario'];
 
 
+// SECTION DASHBOARD CONTABILIDAD
+if ($_POST["funcion"] == "buscar_datos_contabilidad") {
+    $json = array();
+    $usuario->buscar_datos_contabilidad();
+    // echo $usuario->datos;
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'reservas' => $dato->reservas,
+                'clientes' => $dato->clientes,
+                'habitaciones' => $dato->habitaciones,
+                'ventas' => $dato->ventas
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+
+
 
 // SECTION DE CLIENTES
 if ($_POST["funcion"] == "buscar_cliente") {
@@ -27,6 +47,39 @@ if ($_POST["funcion"] == "buscar_cliente") {
     }
 }
 
+if ($_POST["funcion"] == "buscar_cliente_id") {
+    $id_producto = $_POST["id_producto"];
+    $json = array();
+    $usuario->buscar_producto_id($id_producto);
+    if ($usuario->mensaje) {
+        echo $usuario->mensaje;
+    }
+    if ($usuario->datos) {
+        foreach ($usuario->datos as $dato) {
+            $json[] = array(
+                'id_productos' => $dato->id_productos,
+                'nombre' => $dato->nombre,
+                'precio' => $dato->precio,
+                'inventario' => $dato->inventario
+            );
+        }
+        $jsonstring = json_encode($json);
+        echo $jsonstring;
+    }
+}
+if ($_POST["funcion"] == "borrar_cliente") {
+    $id_cliente = $_POST["id_cliente"];
+    $usuario->borrar_cliente($id_cliente);
+    echo $usuario->mensaje;
+}
+if ($_POST["funcion"] == "edit_cliente") {
+    $id_producto = $_POST["id_producto"];
+    $nombre = $_POST["nombre"];
+    $precio = $_POST["precio"];
+    $inventario = $_POST["inventario"];
+    $usuario->edit_producto($id_producto, $nombre, $precio, $inventario);
+    echo $usuario->mensaje;
+}
 
 // FIN DE SECTION DE CLIENTES
 
@@ -308,11 +361,10 @@ if ($_POST["funcion"] == "crear_reserva") {
 }
 if ($_POST["funcion"] == "cerrar_reserva") {
     $total_pagar = $_POST["total_pagar"];
-    $carrito_consumo = $_POST["carrito_consumo"];
     $id_reserva = $_POST["id_reserva"];
     $id_hab = $_POST["id_hab"];
     $fecha_today = $_POST["fecha_today"];
-    $usuario->cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario, $carrito_consumo);
+    $usuario->cerrar_reserva($total_pagar, $id_reserva, $id_hab, $fecha_today, $id_usuario);
     echo $usuario->mensaje;
 }
 if ($_POST["funcion"] == "habitacion_limpieza_terminada") {

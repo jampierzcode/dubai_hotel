@@ -1,6 +1,6 @@
 $(document).ready(function () {
   var funcion = "";
-  var carrito_consumo = [];
+  var carrito_consumo = new Array();
   buscar_reserva();
 
   function buscar_reserva() {
@@ -162,23 +162,42 @@ $(document).ready(function () {
     if (dia < 10) dia = "0" + dia; //agrega cero si el menor de 10
     if (mes < 10) mes = "0" + mes; //agrega cero si el menor de 10
     let fecha_today = ano + "-" + mes + "-" + dia;
-    // console.log(carrito_consumo);
-    $.post(
-      "../../controlador/UsuarioController.php",
-      {
-        funcion,
-        total_pagar,
-        id_hab,
-        id_reserva,
-        fecha_today,
-        carrito_consumo,
-      },
-      (response) => {
-        console.log(response);
-        alert(response);
+    console.log(carrito_consumo.length);
+    if (carrito_consumo.length == 0) {
+      $.post(
+        "../../controlador/UsuarioController.php",
+        {
+          funcion,
+          total_pagar,
+          id_hab,
+          id_reserva,
+          fecha_today,
+        },
+        (response) => {
+          console.log(response);
+          alert(response);
 
-        document.location = "../Recepcion";
-      }
-    );
+          // document.location = "../Recepcion";
+        }
+      );
+    } else {
+      $.post(
+        "../../controlador/UsuarioController.php",
+        {
+          funcion,
+          total_pagar,
+          id_hab,
+          id_reserva,
+          fecha_today,
+          carrito_consumo,
+        },
+        (response) => {
+          console.log(response);
+          alert(response);
+
+          document.location = "../Recepcion";
+        }
+      );
+    }
   });
 });

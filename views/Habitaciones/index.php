@@ -96,7 +96,7 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop" href="#">
+                <a class="toggle-drop" href="../Reservas">
                     <ion-icon name="calendar-outline"></ion-icon>
                     <p>Reservas</p>
                 </a>
@@ -220,10 +220,10 @@ session_start();
             <div class="tables">
                 <div class="table-container">
                     <h1 class="title-table">Habitaciones</h1>
-                    <div class="section-search">
+                    <!-- <div class="section-search">
                         <input type="text" placeholder="Ingrese el nombre del cliente">
                         <ion-icon id="search-btn" name="search-sharp"></ion-icon>
-                    </div>
+                    </div> -->
                     <table>
                         <tr>
                             <th># id</th>
@@ -239,10 +239,10 @@ session_start();
                 </div>
                 <div class="table-container">
                     <h1 class="title-table">Categorias</h1>
-                    <div class="section-search">
+                    <!-- <div class="section-search">
                         <input type="text" placeholder="Ingrese el nombre del cliente">
                         <ion-icon id="search-btn" name="search-sharp"></ion-icon>
-                    </div>
+                    </div> -->
                     <table>
                         <tr>
                             <th># id</th>
@@ -256,10 +256,10 @@ session_start();
                 </div>
                 <div class="table-container">
                     <h1 class="title-table">Pisos</h1>
-                    <div class="section-search">
+                    <!-- <div class="section-search">
                         <input type="text" placeholder="Ingrese el nombre del cliente">
                         <ion-icon id="search-btn" name="search-sharp"></ion-icon>
-                    </div>
+                    </div> -->
                     <table>
                         <tr>
                             <th># id</th>

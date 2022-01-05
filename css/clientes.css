@@ -115,16 +115,31 @@ table tr:nth-child(1) {
 #clientes-body-table > .card-product > .campo_tabla {
   display: flex;
   align-items: center;
+  font-size: 13px !important;
 }
-#clientes-body-table > .card-product > .actions-button-products > button {
-  padding: 4px 15px;
+
+#clientes-body-table > .card-product > .actions-button-clientes > button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+}
+#clientes-body-table > .card-product > .actions-button-clientes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 #clientes-body-table
   > .card-product
-  > .actions-button-products
+  > .actions-button-clientes
+  > button
+  > ion-icon,
+#clientes-body-table > .card-product > .actions-button-clientes > button > i {
+  padding: 4px 15px;
+}
+#clientes-body-table
+  > .card-product
+  > .actions-button-clientes
   > button.btn-remove {
   background: #d24444;
   color: #fff;

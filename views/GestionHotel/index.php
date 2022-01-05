@@ -97,7 +97,7 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop" href="#">
+                <a class="toggle-drop" href="../Reservas/">
                     <ion-icon name="calendar-outline"></ion-icon>
                     <p>Reservas</p>
                 </a>
@@ -125,28 +125,28 @@ session_start();
             <div class="card-count">
                 <div class="left-card">
                     <h1>N° Reservas</h1>
-                    <span>20</span>
+                    <span id="data-reservas">0</span>
                 </div>
                 <ion-icon name="calendar-outline"></ion-icon>
             </div>
             <div class="card-count">
                 <div class="left-card">
                     <h1>N° Clientes</h1>
-                    <span>20</span>
+                    <span id="data-clients">0</span>
                 </div>
                 <ion-icon name="people-outline"></ion-icon>
             </div>
             <div class="card-count">
                 <div class="left-card">
                     <h1>N° Habitaciones</h1>
-                    <span>20</span>
+                    <span id="data-habs">0</span>
                 </div>
                 <ion-icon name="bed-outline"></ion-icon>
             </div>
             <div class="card-count ventas">
                 <div class="left-card">
                     <h1>Venta Total</h1>
-                    <span>S/16 000.00</span>
+                    <span id="data-ventas">S/00.00</span>
                 </div>
                 <ion-icon name="cash-outline"></ion-icon>
             </div>
@@ -160,6 +160,7 @@ session_start();
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../../js/gestion_contabilidad.js"></script>
 <script src="../../js/graficos-admin.js"></script>
 
 </html>

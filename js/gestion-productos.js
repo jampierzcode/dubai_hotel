@@ -2,6 +2,7 @@ $(document).ready(function () {
   var funcion = "";
   buscar_productos();
 
+  // BUSCAR PRODUCTOS
   function buscar_productos() {
     funcion = "buscar_productos";
     $.post(
@@ -10,7 +11,7 @@ $(document).ready(function () {
       (response) => {
         let template = "";
         if (response.trim() == "no-create-products") {
-          template += "No eisten registros de productos";
+          template += "No existen registros de productos";
         } else {
           const productos = JSON.parse(response);
           productos.forEach((producto) => {
@@ -44,6 +45,50 @@ $(document).ready(function () {
     );
   }
 
+  //   CREATE PRODUCTOS
+  $("#add-producto-form").click((e) => {
+    funcion = "crear_productos";
+    e.preventDefault();
+
+    let nombre = $("#producto-nombre").val();
+    let precio = $("#producto-precio").val();
+    let inventario = $("#producto-inventario").val();
+
+    if ((nombre, precio, inventario)) {
+      $.post(
+        "../../controlador/UsuarioController.php",
+        { funcion, nombre, precio, inventario },
+        (response) => {
+          alert("Producto agregado correctamente");
+          $("#producto-nombre").val("");
+          $("#producto-precio").val("");
+          $("#producto-inventario").val("");
+          buscar_productos();
+        }
+      );
+    } else {
+      alert("te faltan llenar campos en el formulario");
+    }
+
+    // let file = new FormData($("#form_producto_add")[0]);
+    // $.ajax({
+    //   url: "../../controlador/UsuarioController.php",
+    //   type: "POST",
+    //   data: file,
+    //   cache: false,
+    //   processData: false,
+    //   contentType: false,
+    // }).done(function (response) {
+    //   if (response.trim() == "no_format_imagen") {
+    //     alert(
+    //       "No se admite este tipo de formato, revisa si la imagen es: jpg, jpeg, png"
+    //     );
+    //   } else {
+    //     console.log("imagen subida con exito");
+    //   }
+    // });
+  });
+
   // REMOVE PRODUCTOS
   $(document).on(
     "click",
@@ -66,7 +111,7 @@ $(document).ready(function () {
       );
     }
   );
-  //  EDIT PRODUCTOS
+  //  EDIT PRODUCTOS POR ACTION BUTTON EDIT
   $(document).on(
     "click",
     ".actions-button-products .btn-edit#edit_product",
@@ -94,6 +139,7 @@ $(document).ready(function () {
       );
     }
   );
+  // EDIT PRODUCTOS POR ACTION DE ACTUALIZAR CLIENTE
   $(document).on("click", "#update-producto-form", (e) => {
     funcion = "edit_producto";
     let id_producto = $("#modal-edit-product").attr("key_producto");
@@ -156,50 +202,6 @@ $(document).ready(function () {
   });
 
   // FIN DE MODAL SHOW
-
-  //   CREATE PRODUCTOS
-  $("#add-producto-form").click((e) => {
-    funcion = "crear_productos";
-    e.preventDefault();
-
-    let nombre = $("#producto-nombre").val();
-    let precio = $("#producto-precio").val();
-    let inventario = $("#producto-inventario").val();
-
-    if ((nombre, precio, inventario)) {
-      $.post(
-        "../../controlador/UsuarioController.php",
-        { funcion, nombre, precio, inventario },
-        (response) => {
-          alert("Producto agregado correctamente");
-          $("#producto-nombre").val("");
-          $("#producto-precio").val("");
-          $("#producto-inventario").val("");
-          buscar_productos();
-        }
-      );
-    } else {
-      alert("te faltan llenar campos en el formulario");
-    }
-
-    // let file = new FormData($("#form_producto_add")[0]);
-    // $.ajax({
-    //   url: "../../controlador/UsuarioController.php",
-    //   type: "POST",
-    //   data: file,
-    //   cache: false,
-    //   processData: false,
-    //   contentType: false,
-    // }).done(function (response) {
-    //   if (response.trim() == "no_format_imagen") {
-    //     alert(
-    //       "No se admite este tipo de formato, revisa si la imagen es: jpg, jpeg, png"
-    //     );
-    //   } else {
-    //     console.log("imagen subida con exito");
-    //   }
-    // });
-  });
 
   // FIN DE CREATE PRODCUTOS
 });

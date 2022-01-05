@@ -98,7 +98,7 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop" href="#">
+                <a class="toggle-drop" href="../Reservas/">
                     <ion-icon name="calendar-outline"></ion-icon>
                     <p>Reservas</p>
                 </a>
@@ -145,6 +145,7 @@ session_start();
                     <div class="input-group">
                         <i class="fas fa-address-card"></i>
                         <input id="documento-modal" disabled type="number" placeholder="Ingrese el numero">
+                        <i id="search-client" class="fas fa-search"></i>
                     </div>
                 </div>
                 <div class="card-input">

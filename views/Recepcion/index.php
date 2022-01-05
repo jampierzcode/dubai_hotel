@@ -103,7 +103,7 @@ session_start();
     <li class="links-menu-dashboard">
         <div class="link-block">
             <div class="left-link">
-                <a class="toggle-drop" href="#">
+                <a class="toggle-drop" href="../Reservas/">
                     <ion-icon name="calendar-outline"></ion-icon>
                     <p>Reservas</p>
                 </a>

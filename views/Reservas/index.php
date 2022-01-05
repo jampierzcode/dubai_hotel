@@ -119,7 +119,7 @@ session_start();
     </aside>
     <div class="container-dashboard">
         <span class="route">
-            > Home > Productos
+            > Home > Reservas
         </span>
 
         <div id="modal-create-product" class="modal-create md-hidden">
@@ -193,18 +193,24 @@ session_start();
                 <!-- </form> -->
             </div>
         </div>
-        <div class="create-productos">
+        <!-- <div class="create-productos">
             <button id="create-productos" class="btn-add">+ Crear</button>
-        </div>
+        </div> -->
         <div class="list-productos">
-            <p>Lista de productos</p>
-            <div class="productos-header-table">
-                <p class=" campo_tabla">Nombre</p>
-                <p class="campo_tabla">Precio</p>
-                <p class="campo_tabla">Stock</p>
-                <p class="campo_tabla">Actions</p>
+            <p>Reservas</p>
+            <div class="reservas-header-table">
+                <p class=" campo_tabla">Cliente</p>
+                <p class=" campo_tabla">Habitacion</p>
+                <p class=" campo_tabla">Fecha Entrada</p>
+                <p class=" campo_tabla">Fecha_Salida</p>
+                <p class=" campo_tabla">Observacion</p>
+                <p class=" campo_tabla">Adelanto</p>
+                <p class=" campo_tabla">Descuento</p>
+                <p class=" campo_tabla">Total</p>
+                <p class=" campo_tabla">Total con Descuento</p>
+                <p class=" campo_tabla">Estado de la reserva</p>
             </div>
-            <div id="productos-body-table">
+            <div id="reservas-body-table">
             </div>
         </div>
 
@@ -217,6 +223,5 @@ session_start();
 
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
-<script src="../../js/gestion-productos.js"></script>
 
 </html>
