@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION["id_usuario"])) {
-    header("Location: views/GestionHotel.php");
+    header("Location: views/GestionHotel");
 } else {
 ?>
     <!DOCTYPE html>
@@ -22,7 +22,7 @@ if (!empty($_SESSION["id_usuario"])) {
 
                 <form action="controlador/LoginController.php" method="post">
                     <div class="header-form">
-                        <h1>Hotel Dubai</h1>
+                        <img style="width: 100%" src="https://hotelemperadortacna.com/img/logohotel.png" alt="">
                         <!-- <img src="img/logo.jpg" alt="logo"> -->
                     </div>
                     <div class="body-form">

@@ -187,6 +187,6 @@ session_start();
 
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
-<script src="../../js/gestion-clientes.js"></script>
+<script src="../../js/dinamic/gestion-clientes.js"></script>
 
 </html>

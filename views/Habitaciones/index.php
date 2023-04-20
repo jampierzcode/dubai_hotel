@@ -120,6 +120,23 @@ session_start();
         <span class="route">
             > Home > Habitaciones
         </span>
+        <div id="modal-edit-habs" class="modal-create md-hidden">
+            <div class="form-create">
+                <!-- <form id="form_producto_add"> -->
+                <div class="close-modal">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                </div>
+                <h1 class="title-modal"></h1>
+                <div id="list-campos" style="display: flex; flex-direction: column; gap: 15px">
+
+                </div>
+                <div class="card-input buttons-modal">
+                    <button id="cancel-form" class="btn-cancel">Cancelar</button>
+                    <button id="update-producto-form" class="btn-create">Actualizar</button>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
 
         <?php
         if (!empty($_GET["view"])) {
@@ -131,7 +148,6 @@ session_start();
                     <div class="form-add" id="form-habs">
                         <div class="content-form">
                             <div class="group-date">
-
                                 <span>N° Habitacion</span>
                                 <input id="habs-numero" type="number" placeholder="Numero de habitacion">
                             </div>
@@ -145,6 +161,21 @@ session_start();
                                 <select name="piso" id="habs-cat">
 
                                 </select>
+                            </div>
+                        </div>
+                        <div class="container-caract"> 
+                            <h1 class="title-action">Caracteristicas</h1>      
+                            <p>Seleccione una de las siguientes caracteristicas</p>                   
+                            <div class="list-caracteristicas">
+                                <div class="target-car">Desayuno</div>
+                                <div class="target-car">Mesa de estudio</div>
+                                <div class="target-car">Pisos alfombrados</div>
+                                <div class="target-car">Baño privado</div>
+                                <div class="target-car">Agua caliente</div>
+                                <div class="target-car">Agua caliente y fria con sistema de therma y rapiducha</div>
+                                <div class="target-car">TV LCD con cable</div>
+                                <div class="target-car">Telefono con discado directo</div>
+                                <div class="target-car">Internet Wifi</div>
                             </div>
                         </div>
                         <div class="actions-button">
@@ -228,9 +259,8 @@ session_start();
                         <tr>
                             <th># id</th>
                             <th>Numero de Habitacion</th>
-                            <th>Tipo de Habitacion</th>
+                            <th>Categoria/Tipo</th>
                             <th>Piso</th>
-                            <th>Precio</th>
                             <th>Acciones</th>
                         </tr>
                         <tbody id="list-habitaciones">
@@ -247,6 +277,7 @@ session_start();
                         <tr>
                             <th># id</th>
                             <th>Categoria</th>
+                            <th>Precio</th>
                             <th>Acciones</th>
                         </tr>
                         <tbody id="list-categorias">
@@ -287,18 +318,18 @@ session_start();
 <?php if (!empty($_GET["view"])) { ?>
     <?php if ($_GET["view"] == "new-habitacion") { ?>
 
-        <script src="../../js/create-hab.js"></script>
+        <script src="../../js/dinamic/create-hab.js"></script>
     <?php } ?>
     <?php if ($_GET["view"] == "new-categoria") { ?>
 
-        <script src="../../js/create-cats-habs.js"></script>
+        <script src="../../js/dinamic/create-cats-habs.js"></script>
     <?php } ?>
     <?php if ($_GET["view"] == "new-piso") { ?>
 
-        <script src="../../js/create-piso-habs.js"></script>
+        <script src="../../js/dinamic/create-piso-habs.js"></script>
     <?php } ?>
 <?php } else { ?>
-    <script src="../../js/gestionhab.js"></script>
+    <script src="../../js/dinamic/gestionhab.js"></script>
 
 <?php } ?>
 
