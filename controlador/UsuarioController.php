@@ -246,10 +246,11 @@ if ($_POST["funcion"] == "registrar_ventas_productos") {
 // SECTION DE HABITACIONES
 
 if ($_POST["funcion"] == "crear_habitacion") {
+    $caracteristicas = $_POST["caracteristicas_desc"];
     $n_habitacion = $_POST["n_habitacion"];
     $habs_piso = $_POST["habs_piso"];
     $habs_cat = $_POST["habs_cat"];
-    $usuario->crear_habitaciones($n_habitacion, $habs_piso, $habs_cat);
+    $usuario->crear_habitaciones($n_habitacion, $habs_piso, $habs_cat, $caracteristicas);
     echo $usuario->mensaje;
 }
 if ($_POST["funcion"] == "crear_cat-habitacion") {
@@ -294,7 +295,8 @@ if ($_POST["funcion"] == "buscar_cat_hab") {
         foreach ($usuario->datos as $dato) {
             $json[] = array(
                 'id_categoria' => $dato->id_cat_habitaciones,
-                'nombre_categoria' => $dato->nombre_categoria
+                'nombre_categoria' => $dato->nombre_categoria,
+                'precio' => $dato->precio
             );
         }
         $jsonstring = json_encode($json);

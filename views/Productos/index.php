@@ -217,6 +217,6 @@ session_start();
 
 <script src="../../js/jquery.min.js"></script>
 <script src="../../components/sidebar.js"></script>
-<script src="../../js/gestion-productos.js"></script>
+<script src="../../js/DINAMIC/gestion-productos.js"></script>
 
 </html>
