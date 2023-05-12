@@ -14,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="../../css/navdashboard.css">
     <link rel="stylesheet" href="../../css/container-dashboard.css">
     <link rel="stylesheet" href="../../css/habitaciones.css">
+    <link rel="stylesheet" href="../../css/drag-drop.css">
     <link rel="icon" href="../../img/logo.jpg">
     <title>Hotel Dubai / Gestion</title>
 </head>
@@ -146,7 +147,7 @@ session_start();
                 <div class="create-habs">
                     <h1 class="title-action">Crear Habitacion</h1>
                     <div class="form-add" id="form-habs">
-                        <div class="content-form">
+                        <div class="content-form grid-3-column">
                             <div class="group-date">
                                 <span>N° Habitacion</span>
                                 <input id="habs-numero" type="number" placeholder="Numero de habitacion">
@@ -164,17 +165,15 @@ session_start();
                             </div>
                         </div>
                         <div class="container-caract"> 
-                            <h1 class="title-action">Caracteristicas</h1>      
+                            <h1 class="title-action mt-6">Caracteristicas</h1>      
                             <p>Seleccione una de las siguientes caracteristicas</p>                   
                             <div class="list-caracteristicas">
                                 <div class="target-car">Desayuno</div>
                                 <div class="target-car">Mesa de estudio</div>
-                                <div class="target-car">Pisos alfombrados</div>
                                 <div class="target-car">Baño privado</div>
-                                <div class="target-car">Agua caliente</div>
-                                <div class="target-car">Agua caliente y fria con sistema de therma y rapiducha</div>
+                                <div class="target-car">Pisos alfombrados</div><div class="target-car">Agua caliente</div>
                                 <div class="target-car">TV LCD con cable</div>
-                                <div class="target-car">Telefono con discado directo</div>
+                                <div class="target-car">Telefono</div>
                                 <div class="target-car">Internet Wifi</div>
                             </div>
                         </div>
@@ -182,6 +181,7 @@ session_start();
                             <button id="habs-btn-add" class="btn-add-create">Agregar</button>
                             <a href="../Habitaciones/" class="btn-cancel-create">Cancelar</a>
                         </div>
+                        
                     </div>
                 </div>
             <?php } ?>
@@ -202,8 +202,22 @@ session_start();
                                 <span>Precio</span>
                                 <input id="categoria-precio" type="number" placeholder="Precio de la Categoria">
                             </div>
-
-
+                        </div>
+                        
+                        <div class="container-images">
+                            <h1 class="title-action">Subir Imagenes</h1>      
+                            <p>Sube una imagen de portada de la habitacion</p> 
+                            <div class="container-drag">
+                                <div class="drag-area">
+                                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                                    <header class="title-drag">Drag & Drop to Upload File</header>
+                                    <span>OR</span>
+                                    
+                                </div>
+                                <button class="drag-btn">Browse File</button>
+                            </div>
+                            <input multiple id="img_dsct" type="file" hidden>
+                            <!-- <button id="save_img" class="drag-btn">Subir imagen</button> -->
                         </div>
                         <div class="actions-button">
                             <button id="cat-habs-btn-add" class="btn-add-create">Agregar</button>
@@ -276,6 +290,7 @@ session_start();
                     <table>
                         <tr>
                             <th># id</th>
+                            <th>imgUrl</th>
                             <th>Categoria</th>
                             <th>Precio</th>
                             <th>Acciones</th>
@@ -317,12 +332,13 @@ session_start();
 <script src="../../components/sidebar.js"></script>
 <?php if (!empty($_GET["view"])) { ?>
     <?php if ($_GET["view"] == "new-habitacion") { ?>
-
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="../../js/dinamic/create-hab.js"></script>
-    <?php } ?>
-    <?php if ($_GET["view"] == "new-categoria") { ?>
-
-        <script src="../../js/dinamic/create-cats-habs.js"></script>
+        <?php } ?>
+        <?php if ($_GET["view"] == "new-categoria") { ?>
+            
+            <script src="../../js/dinamic/create-cats-habs.js"></script>
+            <script src="../../js/static/drag-drop.js"></script>
     <?php } ?>
     <?php if ($_GET["view"] == "new-piso") { ?>
 

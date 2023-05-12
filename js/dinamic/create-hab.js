@@ -1,5 +1,8 @@
 $(document).ready(function () {
   var funcion = "";
+  var imgUrl = "";
+  var CLOUDINARYURL = "https://api.cloudinary.com/v1_1/dprxpdyo0/image/upload";
+  var CLOUDINARY = "gvxcgblr";
   buscar_cat_hab();
   buscar_piso_hab();
 
@@ -59,15 +62,15 @@ $(document).ready(function () {
     );
   }
   $(".list-caracteristicas .target-car").click((e) => {
-    $(e.target).toggleClass("active")
-  })
+    $(e.target).toggleClass("active");
+  });
   $("#habs-btn-add").click(() => {
     funcion = "crear_habitacion";
     let n_habitacion = $("#habs-numero").val();
     let habs_piso = $("#habs-piso").val();
     let habs_cat = $("#habs-cat").val();
-    let caracteristicas = $(".target-car.active")
-    let caracteristicas_desc = ""
+    let caracteristicas = $(".target-car.active");
+    let caracteristicas_desc = "";
     for (let index = 0; index < caracteristicas.length; index++) {
       const element = caracteristicas[index];
       caracteristicas_desc += element.innerHTML;
@@ -75,23 +78,30 @@ $(document).ready(function () {
         caracteristicas_desc += ",";
       }
     }
-    $("#list-carcate").html(caracteristicas_desc)
-    if (habs_piso > 0 && habs_cat > 0) {
+    if (habs_piso > 0 && habs_cat > 0 && caracteristicas_desc !== "") {
       $.post(
         "../../controlador/UsuarioController.php",
         {
           funcion,
           n_habitacion,
           habs_piso,
-          habs_cat, caracteristicas_desc
+          habs_cat,
+          caracteristicas_desc,
         },
         (response) => {
-          $("#habs-numero").val("");
-          $("#habs-piso").val(0);
-          $("#habs-cat").val(0);
-          let activesCategories = $(".list-caracteristicas .target-car.active")
-          for (let index = 0; index < activesCategories.length; index++) {
-            activesCategories[index].classList.remove("active");
+          if (response == "add-habs") {
+            alert("Se creo correctamente la habitacion");
+            $("#habs-numero").val("");
+            $("#habs-piso").val(0);
+            $("#habs-cat").val(0);
+            let activesCategories = $(
+              ".list-caracteristicas .target-car.active"
+            );
+            for (let index = 0; index < activesCategories.length; index++) {
+              activesCategories[index].classList.remove("active");
+            }
+          } else {
+            console.log("paso algo");
           }
         }
       );
@@ -102,6 +112,12 @@ $(document).ready(function () {
       }
       if (habs_cat == 0) {
         template += "Falta registrar categorias";
+      }
+      if (imgUrl == "") {
+        template += "Falta subir una imagen";
+      }
+      if (caracteristicas_desc == "") {
+        template += "Falta seleccionar por lo menos una categoria";
       }
       alert(template);
     }

@@ -104,7 +104,6 @@ $(document).ready(function () {
     );
   }
   $("#search-piso").change(() => {
-    let val = $("#search-piso").val();
     buscar_habitaciones();
   });
 });

@@ -233,14 +233,14 @@ session_start();
 if (!empty($_GET["view"])) {
     if ($_GET["view"] = "vender") {
 ?>
-        <script src="../../js/carrito_ventas.js"></script>
-        <script src="../../js/gestion-ventas.js"></script>
+        <script src="../../js/dinamic/carrito_ventas.js"></script>
+        <script src="../../js/dinamic/gestion-ventas.js"></script>
     <?php
 
     }
 } else {
     ?>
-    <script src="../../js/habs_ocupadas.js"></script>
+    <script src="../../js/dinamic/habs_ocupadas.js"></script>
 <?php
 }
 ?>

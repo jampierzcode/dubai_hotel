@@ -7,6 +7,13 @@ $categoria_hab = $_GET["category"];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- flagstag css -->
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"
+/>
+
+
     <!-- date range -->
     <link
       rel="stylesheet"
@@ -14,7 +21,7 @@ $categoria_hab = $_GET["category"];
       href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
     />
     <!-- habitaciones css -->
-    <link rel="stylesheet" href="../../css/habitaciones.css">
+    <link rel="stylesheet" href="../../css/room_detail.css">
     <!-- swiper -->
     <link
   rel="stylesheet"
@@ -126,6 +133,8 @@ $categoria_hab = $_GET["category"];
                         <input name="fecha" id="fecha" type="text" name="daterange"/>
                     </div>
                     <div class="box-input">
+                    <span class="fi fi-cl"></span>
+                    <span class="fi fi-pe"></span>
                         <input id="user_telefono" name="" type="text" placeholder="Telefono: 999999999" />
                     </div>
                     <div class="box-input">
@@ -237,9 +246,9 @@ $categoria_hab = $_GET["category"];
       src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
     ></script>
     
-    <script src="../../js/picker_custom.js"></script>
-    <script src="../../js/swiper-habs.js"></script>
-    <script src="../../js/email.js"></script>
+    <script src="../../js/static/picker_custom.js"></script>
+    <script src="../../js/static/swiper-habs.js"></script>
+    <script src="../../js/static/email.js"></script>
 
     <!-- ion icons js -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

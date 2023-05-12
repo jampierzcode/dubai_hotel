@@ -83,6 +83,7 @@
 .main {
   width: 100%;
   height: calc(100% - 70px);
+  overflow-y: auto;
   /* background: #222e3c; */
   background: #11101d;
 }
@@ -134,7 +135,7 @@
   font-size: 40px;
 }
 .logo > p {
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 700;
 }
 .toggle-drop {

@@ -53,7 +53,7 @@ class Usuario
     }
     function buscar_cat_hab()
     {
-        $sql = "SELECT id_cat_habitaciones, nombre_categoria, precio FROM cat_habitaciones";
+        $sql = "SELECT id_cat_habitaciones, nombre_categoria, precio, galeria FROM cat_habitaciones";
         $query = $this->conexion->prepare($sql);
         $query->execute();
         $this->datos = $query->fetchAll(); // retorna objetos o no
@@ -78,12 +78,12 @@ class Usuario
             return $this->mensaje;
         }
     }
-    function crear_cat_habitaciones($categoria_nombre, $categoria_precio)
+    function crear_cat_habitaciones($categoria_nombre, $categoria_precio, $galeria)
     {
-        $sql = "INSERT INTO cat_habitaciones(nombre_categoria, precio) VALUES (:nombre_categoria, :precio)";
+        $sql = "INSERT INTO cat_habitaciones(nombre_categoria, precio, galeria) VALUES (:nombre_categoria, :precio, :galeria)";
         $query = $this->conexion->prepare($sql);
         try {
-            $query->execute(array(":nombre_categoria" => $categoria_nombre, ":precio" => $categoria_precio));
+            $query->execute(array(":nombre_categoria" => $categoria_nombre, ":precio" => $categoria_precio, ":galeria"=> $galeria));
             $this->mensaje = "add-cat-habs";
             return $this->mensaje;
         } catch (\Throwable $error) {

@@ -218,12 +218,12 @@ session_start();
 if (!empty($_GET["view"])) {
     if ($_GET["view"] = "verificacion") {
 ?>
-        <script src="../../js/gestion-salidas.js"></script>
+        <script src="../../js/dinamic/gestion-salidas.js"></script>
     <?php
     }
 } else {
     ?>
-    <script src="../../js/habs_ocupadas.js"></script>
+    <script src="../../js/dinamic/habs_ocupadas.js"></script>
 <?php
 }
 ?>

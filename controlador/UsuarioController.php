@@ -245,6 +245,7 @@ if ($_POST["funcion"] == "registrar_ventas_productos") {
 
 // SECTION DE HABITACIONES
 
+
 if ($_POST["funcion"] == "crear_habitacion") {
     $caracteristicas = $_POST["caracteristicas_desc"];
     $n_habitacion = $_POST["n_habitacion"];
@@ -254,9 +255,10 @@ if ($_POST["funcion"] == "crear_habitacion") {
     echo $usuario->mensaje;
 }
 if ($_POST["funcion"] == "crear_cat-habitacion") {
+    $galeria = $_POST["galeria"];
     $categoria_nombre = $_POST["categoria_nombre"];
     $categoria_precio = $_POST["categoria_precio"];
-    $usuario->crear_cat_habitaciones($categoria_nombre, $categoria_precio);
+    $usuario->crear_cat_habitaciones($categoria_nombre, $categoria_precio, $galeria);
     echo $usuario->mensaje;
 }
 if ($_POST["funcion"] == "crear_piso-habitacion") {
@@ -293,10 +295,13 @@ if ($_POST["funcion"] == "buscar_cat_hab") {
     }
     if ($usuario->datos) {
         foreach ($usuario->datos as $dato) {
+            $jsongaleria = json_decode($dato->galeria);
+
             $json[] = array(
                 'id_categoria' => $dato->id_cat_habitaciones,
                 'nombre_categoria' => $dato->nombre_categoria,
-                'precio' => $dato->precio
+                'precio' => $dato->precio,
+                "galeria"=> $jsongaleria
             );
         }
         $jsonstring = json_encode($json);

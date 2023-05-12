@@ -128,12 +128,14 @@ ul {
 p {
   line-height: 1.8;
 }
-
 .grid-4-column {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
-
+.grid-3-column-ajust{
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+}
 .grid-3-column {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

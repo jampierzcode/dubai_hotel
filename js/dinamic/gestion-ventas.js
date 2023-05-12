@@ -14,7 +14,6 @@ $(document).ready(function () {
       "../../controlador/UsuarioController.php",
       { funcion, id_habitacion },
       (response) => {
-        console.log(response);
         const reserva = JSON.parse(response);
         reserva.forEach((detail) => {
           $("#reserva_key").attr("key_reserva", `${detail.id_reservas}`);

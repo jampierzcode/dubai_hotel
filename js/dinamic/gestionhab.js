@@ -53,6 +53,7 @@ $(document).ready(function () {
             template += `
             <tr>
             <td>${categoria.id_categoria}</td>
+            <td><img class="img_circle_perfil" src="../../imagenes/categorias/${categoria.nombre_categoria}/${categoria.galeria[0]}"></td>
             <td>${categoria.nombre_categoria}</td>
             <td>S/${categoria.precio}.00</td>
             <td>
@@ -67,7 +68,6 @@ $(document).ready(function () {
       }
     );
   }
-
 
   buscar_habitaciones();
   function buscar_habitaciones() {
@@ -104,70 +104,67 @@ $(document).ready(function () {
   var campo_general = "";
   var campos = [
     {
-      "title": "categoria",
+      title: "categoria",
       campos: [
         {
           name: "Nombre",
           id: "nombre",
           type: "text",
-          originData: null
+          originData: null,
         },
         {
           name: "Precio",
           id: "precio",
           type: "number",
-          originData: null
-        }
-      ]
+          originData: null,
+        },
+      ],
     },
     {
-      "title": "habitaciones",
+      title: "habitaciones",
       campos: [
         {
           name: "Numero de Habitacion",
           id: "numero",
           type: "number",
-          originData: null
+          originData: null,
         },
         {
           name: "Categoria/Tipo",
           id: "categoria",
           type: "select",
-          originData: "categoria"
-
+          originData: "categoria",
         },
         {
           name: "Piso",
           id: "piso",
           type: "select",
-          originData: "piso"
-        }
-      ]
+          originData: "piso",
+        },
+      ],
     },
     {
-      "title": "piso",
+      title: "piso",
       campos: [
         {
           name: "Numero de Piso",
           id: "numero",
           type: "number",
-          originData: null
-        }
-      ]
-    }
-  ]
+          originData: null,
+        },
+      ],
+    },
+  ];
   // funcion de editar campos de modal
   function edit_modal_campos(campo_general) {
-
     for (let index = 0; index < campos.length; index++) {
       if (campos[index].title == campo_general) {
         let element = campos[index];
-        console.log(element.title)
         // editar el modal en diferentes campos
         // title
         $("#modal-edit-habs .title-modal").html(`Editar ${element.title}`);
         // campos
-        template_campos = ""
+        template_campos = "";
         for (let ind = 0; ind < element.campos.length; ind++) {
           template_campos += `
           <div class="card-input">
@@ -179,7 +176,7 @@ $(document).ready(function () {
               <input type="text" id="${campos[index].title}-${element.campos[ind].name}" placeholder="Ingrese el ${element.campos[ind].name}">
           </div>
           </div>
-              `
+              `;
               break;
             case "number":
               template_campos += `
@@ -187,7 +184,7 @@ $(document).ready(function () {
               <input type="number" id="${campos[index].title}-${element.campos[ind].id}" placeholder="Ingrese el ${element.campos[ind].name}">
           </div>
           </div>
-              `
+              `;
               break;
             case "select":
               template_campos += `
@@ -197,14 +194,14 @@ $(document).ready(function () {
               </select>
           </div>
           </div>
-              `
+              `;
               break;
 
             default:
               break;
           }
         }
-        $("#modal-edit-habs #list-campos").html(template_campos)
+        $("#modal-edit-habs #list-campos").html(template_campos);
       }
     }
     $("#modal-edit-habs").removeClass("md-hidden");
@@ -212,72 +209,63 @@ $(document).ready(function () {
   // fin de funcion de editar campos de modal
 
   //  EDIT habitaciones
-  $(document).on(
-    "click",
-    ".edit-btn#edit-hab",
-    (e) => {
-      campo_general = "habitaciones"
-      // llamamos a la funcion para modal
-      edit_modal_campos(campo_general)
-      // fin de la funcion modal
+  $(document).on("click", ".edit-btn#edit-hab", (e) => {
+    campo_general = "habitaciones";
+    // llamamos a la funcion para modal
+    edit_modal_campos(campo_general);
+    // fin de la funcion modal
 
-
-      console.log(campo_general)
-      funcion = "buscar_habs_id";
-      let id_hab = $(e.target).attr("key_hab");
-      console.log(id_hab)
-      // $.post(
-      //   "../../controlador/UsuarioController.php",
-      //   { funcion, id_producto },
-      //   (response) => {
-      //     const producto = JSON.parse(response);
-      //     producto.forEach((element) => {
-      //       $("#modal-edit-product").attr(
-      //         "key_producto",
-      //         `${ element.id_productos } `
-      //       );
-      //       $("#modal-edit-product #producto-nombre").val(`${ element.nombre } `);
-      //       $("#modal-edit-product #producto-precio").val(`${ element.precio } `);
-      //       $("#modal-edit-product #producto-inventario").val(
-      //         `${ element.inventario } `
-      //       );
-      //     });
-      //   }
-      // );
-    }
-  );
+    console.log(campo_general);
+    funcion = "buscar_habs_id";
+    let id_hab = $(e.target).attr("key_hab");
+    console.log(id_hab);
+    // $.post(
+    //   "../../controlador/UsuarioController.php",
+    //   { funcion, id_producto },
+    //   (response) => {
+    //     const producto = JSON.parse(response);
+    //     producto.forEach((element) => {
+    //       $("#modal-edit-product").attr(
+    //         "key_producto",
+    //         `${ element.id_productos } `
+    //       );
+    //       $("#modal-edit-product #producto-nombre").val(`${ element.nombre } `);
+    //       $("#modal-edit-product #producto-precio").val(`${ element.precio } `);
+    //       $("#modal-edit-product #producto-inventario").val(
+    //         `${ element.inventario } `
+    //       );
+    //     });
+    //   }
+    // );
+  });
   //  EDIT CATEGORIA habitaciones
-  $(document).on(
-    "click",
-    ".edit-btn#edit-cat-hab",
-    (e) => {
-      campo_general = "categoria"
-      // llamamos a la funcion para modal
-      edit_modal_campos(campo_general)
-      // fin de la funcion modal
-      funcion = "buscar_habs_id";
-      let id_cliente = $(e.target).attr("key_hab");
-      console.log(id_cliente)
-      // $.post(
-      //   "../../controlador/UsuarioController.php",
-      //   { funcion, id_producto },
-      //   (response) => {
-      //     const producto = JSON.parse(response);
-      //     producto.forEach((element) => {
-      //       $("#modal-edit-product").attr(
-      //         "key_producto",
-      //         `${ element.id_productos } `
-      //       );
-      //       $("#modal-edit-product #producto-nombre").val(`${ element.nombre } `);
-      //       $("#modal-edit-product #producto-precio").val(`${ element.precio } `);
-      //       $("#modal-edit-product #producto-inventario").val(
-      //         `${ element.inventario } `
-      //       );
-      //     });
-      //   }
-      // );
-    }
-  );
+  $(document).on("click", ".edit-btn#edit-cat-hab", (e) => {
+    campo_general = "categoria";
+    // llamamos a la funcion para modal
+    edit_modal_campos(campo_general);
+    // fin de la funcion modal
+    funcion = "buscar_habs_id";
+    let id_cliente = $(e.target).attr("key_hab");
+    console.log(id_cliente);
+    // $.post(
+    //   "../../controlador/UsuarioController.php",
+    //   { funcion, id_producto },
+    //   (response) => {
+    //     const producto = JSON.parse(response);
+    //     producto.forEach((element) => {
+    //       $("#modal-edit-product").attr(
+    //         "key_producto",
+    //         `${ element.id_productos } `
+    //       );
+    //       $("#modal-edit-product #producto-nombre").val(`${ element.nombre } `);
+    //       $("#modal-edit-product #producto-precio").val(`${ element.precio } `);
+    //       $("#modal-edit-product #producto-inventario").val(
+    //         `${ element.inventario } `
+    //       );
+    //     });
+    //   }
+    // );
+  });
   // SHOW MODAL CREATE
   $("#create-clients").click(() => {
     $(".modal-create").removeClass("md-hidden");
